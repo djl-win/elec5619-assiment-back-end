@@ -1,5 +1,6 @@
 package com.group50.dto;
 
+import com.group50.entity.People;
 import lombok.Data;
 
 /**
@@ -8,7 +9,7 @@ import lombok.Data;
 @Data
 public class SmsMessage {
     //或者用userDetail
-    private String telephone;
+    private People people;
 
     private String code;
 }

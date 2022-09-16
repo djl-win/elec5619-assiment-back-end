@@ -12,6 +12,8 @@ import com.group50.utils.SmsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -24,13 +26,8 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private SmsUtil smsUtil;
 
-    /**
-     * 校验用户是否存在，并发送验证码
-     * @param admin 用户详细信息
-     * @return 手机验证码
-     */
     @Override
-    public String findAdmin(Admin admin) {
+    public SmsMessage findAdmin(Admin admin) {
 
         //1.接受前端传入的信息（用户名，密码）
         String username = admin.getAdminUsername();
@@ -50,7 +47,35 @@ public class AdminServiceImpl implements AdminService {
 
         //4.2 帮助其发送验证码
         //4.3 返回值传给前端
-        String code = smsUtil.sentCode(peoplePhone);
-        return code;
+        SmsMessage smsMessage = new SmsMessage();
+        smsMessage.setCode(smsUtil.makeCode(peoplePhone));
+
+        //4.4 把查询到的用户返回出去,之后存入session方便下个方法调用
+        smsMessage.setPeople(peopleResult);
+
+        return smsMessage;
     }
+
+    @Override
+    public int checkCode(SmsMessage smsMessage) {
+
+        //1.从缓存中获取用户的验证码
+        String codeFromCache = smsUtil.getSmsCodeFromCache(smsMessage.getPeople().getPeoplePhone());
+
+        //2.检验用户输入的验证码是否正确
+        boolean equals = smsMessage.getCode().equals(codeFromCache);
+
+        //3.登陆失败返回402返回码，以及错误信息
+        if(!equals){
+            throw new CustomException(ResultInfo.WRONG_PHONE_VERIFICATION_CODE,ResultInfo.WRONG_PHONE_VERIFICATION_MSG);
+        }
+
+        //4.登录成功，把用户存储到session中，设置拦截器。到拦截器handler中，把其用户id设置到线程中去。
+        Admin admin = adminRepository.findAdminByAdminPeopleIdEquals(smsMessage.getPeople().getPeopleId());
+        System.out.println(admin.getAdminId());
+        return admin.getAdminId();
+
+    }
+
+
 }

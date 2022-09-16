@@ -2,10 +2,11 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
          updateCheck="false">
-<!-- 缓存文件地址，自行更改 -->
+<!-- 缓存位置 -->
 <!--    <diskStore path="D:\my code\ehcache"/>-->
+<!--    120s过期-->
     <cache
-        name="VerifyCodeSpace"
+        name="SmsCodeSpace"
         eternal="false"
         diskPersistent="false"
         maxElementsInMemory="1000"

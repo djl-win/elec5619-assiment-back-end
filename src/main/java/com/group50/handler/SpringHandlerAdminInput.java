@@ -28,12 +28,12 @@ public class SpringHandlerAdminInput {
             if (arg.getClass().equals(Admin.class)) {
 
                 Admin input = (Admin) arg;
-                System.out.println(input.getAdminUsername());
+//                System.out.println(input.getAdminUsername());
                 if (input.getAdminUsername() != null && input.getAdminPassword() != null) {
                     input.setAdminUsername(input.getAdminUsername().trim());
                     input.setAdminPassword(input.getAdminPassword().trim());
                 }
-                System.out.println(input.getAdminUsername());
+//                System.out.println(input.getAdminUsername());
             }
 
 
