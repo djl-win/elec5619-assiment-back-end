@@ -1,5 +1,6 @@
 package com.group50.service.Impl;
 
+import com.alibaba.fastjson.JSON;
 import com.group50.common.ResultInfo;
 import com.group50.dto.SmsMessage;
 import com.group50.entity.Admin;
@@ -12,7 +13,6 @@ import com.group50.utils.SmsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -72,9 +72,48 @@ public class AdminServiceImpl implements AdminService {
 
         //4.登录成功，把用户存储到session中，设置拦截器。到拦截器handler中，把其用户id设置到线程中去。
         Admin admin = adminRepository.findAdminByAdminPeopleIdEquals(smsMessage.getPeople().getPeopleId());
-        System.out.println(admin.getAdminId());
+
+        //5.返回管理员的id，到controller层，在controller层加载到session中
         return admin.getAdminId();
 
+    }
+
+    @Override
+    public String registerAdmin(String registerDetail) {
+
+        Admin admin = JSON.parseObject(registerDetail, Admin.class);
+        People people = JSON.parseObject(registerDetail, People.class);
+
+        //1.查询tb_admin表,username存不存在，存在直接返回404
+        Admin tempAdmin = adminRepository.findAdminByAdminUsernameEquals(admin.getAdminUsername());
+        if(tempAdmin != null){
+            throw new CustomException(ResultInfo.EXIST_USERNAME_CODE,ResultInfo.EXIST_USERNAME_MSG);
+        }
+
+        //2.查询tb_people表,Phone存不存在，存在直接返回405
+        People tempPeopleOne = peopleRepository.findPeopleByPeoplePhoneEquals(people.getPeoplePhone());
+        if(tempPeopleOne != null){
+            throw new CustomException(ResultInfo.EXIST_PHONE_CODE,ResultInfo.EXIST_PHONE_MSG);
+        }
+
+        //3.查询tb_people表,Email存不存在，存在返回406
+        People tempPeopleTwo = peopleRepository.findPeopleByPeopleEmailEquals(people.getPeopleEmail());
+        if(tempPeopleTwo != null){
+            throw new CustomException(ResultInfo.EXIST_EMAIL_CODE,ResultInfo.EXIST_EMAIL_MSG);
+        }
+
+
+        //4.新增一个people记录
+        People newPeople = peopleRepository.save(people);
+
+        //5.获取新增people的id，当作admin的外键
+        int newPeopleId = newPeople.getPeopleId();
+        admin.setAdminPeopleId(newPeopleId);
+
+        //6.新增一个admin记录，完事
+        Admin newAdmin = adminRepository.save(admin);
+
+        return "register successful";
     }
 
 

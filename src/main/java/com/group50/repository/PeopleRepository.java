@@ -14,4 +14,17 @@ public interface PeopleRepository extends JpaRepository<People, Integer> {
      */
     People findPeopleByPeopleIdEquals(int id);
 
+    /**
+     * 通过people的phone查询people详细信息
+     * @param peoplePhone 用户手机号
+     * @return 用户详细信息
+     */
+    People findPeopleByPeoplePhoneEquals(String peoplePhone);
+
+    /**
+     * 通过people的email查询people详细信息
+     * @param peopleEmail 用户邮箱
+     * @return 用户详细信息
+     */
+    People findPeopleByPeopleEmailEquals(String peopleEmail);
 }

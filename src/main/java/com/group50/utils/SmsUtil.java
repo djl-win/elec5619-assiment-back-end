@@ -14,14 +14,14 @@ public class SmsUtil {
      * @return 用户验证码
      */
     public String generateCode(String tel){
-        int hash = tel.hashCode();
-        int encryption = 17458521;
-        long encryptResult = hash ^ encryption;
+        int hashcode = tel.hashCode();
+        int encryptNumber = 47685460;
+        long encryptResultFirstTime = hashcode ^ encryptNumber;
         long currentTime = System.currentTimeMillis();
-        encryptResult = encryptResult ^ currentTime;
-        long result = encryptResult % 1000000;
-        result = result < 0 ? -result : result;
-        String code = result + "";
+        encryptResultFirstTime = encryptResultFirstTime ^ currentTime;
+        long finalResult = encryptResultFirstTime % 1000000;
+        finalResult = finalResult < 0 ? -finalResult : finalResult;
+        String code = finalResult + "";
         int len = code.length();
         return match[len] + code;
     }

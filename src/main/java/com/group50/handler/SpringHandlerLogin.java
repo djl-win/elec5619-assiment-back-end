@@ -2,7 +2,6 @@ package com.group50.handler;
 
 import com.group50.common.AdminThread;
 import com.group50.common.ResultInfo;
-import com.group50.entity.People;
 import com.group50.exception.CustomException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

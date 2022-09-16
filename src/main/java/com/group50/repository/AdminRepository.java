@@ -21,4 +21,11 @@ public interface AdminRepository extends JpaRepository<Admin, Integer>{
      * @return 管理员的id
      */
     Admin findAdminByAdminPeopleIdEquals(int id);
+
+    /**
+     * 通过管理员用户名查询
+     * @param username 用户名
+     * @return 查询的结果
+     */
+    Admin findAdminByAdminUsernameEquals(String username);
 }
