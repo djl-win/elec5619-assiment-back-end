@@ -4,15 +4,15 @@
          updateCheck="false">
 <!-- 缓存文件地址，自行更改 -->
 <!--    <diskStore path="D:\my code\ehcache"/>-->
-<!--    <cache-->
-<!--        name="VerifyCodeSpace"-->
-<!--        eternal="false"-->
-<!--        diskPersistent="false"-->
-<!--        maxElementsInMemory="1000"-->
-<!--        overflowToDisk="false"-->
-<!--        timeToIdleSeconds="120"-->
-<!--        timeToLiveSeconds="120"-->
-<!--        memoryStoreEvictionPolicy="LRU"/>-->
+    <cache
+        name="VerifyCodeSpace"
+        eternal="false"
+        diskPersistent="false"
+        maxElementsInMemory="1000"
+        overflowToDisk="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        memoryStoreEvictionPolicy="LRU"/>
 
 <!--    <cache-->
 <!--            name="MailCodeSpace"-->
