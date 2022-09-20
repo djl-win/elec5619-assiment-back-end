@@ -88,6 +88,13 @@
             <version>1.2.48</version>
         </dependency>
 
+        <!-- faker data api -->
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
     </dependencies>
 
 

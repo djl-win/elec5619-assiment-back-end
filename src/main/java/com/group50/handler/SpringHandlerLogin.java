@@ -26,6 +26,7 @@ public class SpringHandlerLogin implements HandlerInterceptor {
 
         if(adminId == null){
             //拦截成功返回报错信息，或者重定向
+//            response.sendRedirect(request.getContextPath()+"/pages/mIndex.html");
             throw new CustomException(ResultInfo.NON_LOGIN_CODE,ResultInfo.NON_LOGIN_MSG);
         }
         //加载管理员id到线程

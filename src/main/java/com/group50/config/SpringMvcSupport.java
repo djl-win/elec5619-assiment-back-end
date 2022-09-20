@@ -20,8 +20,8 @@ public class SpringMvcSupport implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 //未启用拦截，等页面搞好再看看
 //        registry.addInterceptor(springHandlerLogin)
-//                .addPathPatterns("/pages/**")
-//                .excludePathPatterns("/pages/index.html","/pages/sign.html");
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/pages/index.html");
     }
 
 

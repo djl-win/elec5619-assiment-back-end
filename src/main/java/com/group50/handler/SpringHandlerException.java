@@ -32,7 +32,7 @@ public class SpringHandlerException {
     public Result<String> customException(CustomException ex){
 
         //return info to web developer
-        return Result.fail(ex.getMessage(), ex.getCode(),"custom exception");
+        return Result.fail("custom exception", ex.getCode(), ex.getMessage());
     }
 
 

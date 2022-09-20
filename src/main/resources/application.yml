@@ -26,3 +26,23 @@ spring:
         #Remove the hump naming rule, sometimes he will convert your mapping automatically,studentID == student_id
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     open-in-view: false # address warn : spring.jpa.open-in-view is enabled by default
+
+  #config timer task thread numbers
+  #https://blog.csdn.net/Alian_1223/article/details/120455623
+  task:
+    execution:
+      pool:
+        core-size: 8
+        max-size: 10
+        #queue-capacity: 10
+        #keep-alive: 60
+      thread-name-prefix: museum_
+
+
+random:
+  people:
+    peopleName: ${random.value}
+    peopleGender: ${random.int[1,2]}
+    peopleAge: ${random.int[1,80]}
+    peopleEmail: ${random.value}
+    peoplePhone: ${random.int[1000021234567,]}
