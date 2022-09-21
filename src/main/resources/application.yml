@@ -37,6 +37,9 @@ spring:
         #queue-capacity: 10
         #keep-alive: 60
       thread-name-prefix: museum_
+      # 应用关闭时，是否等待定时任务执行完成
+      shutdown:
+        await-termination: true
 
 
 random:

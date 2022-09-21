@@ -1,7 +1,7 @@
 package com.group50.controller;
 
 import com.group50.common.Result;
-import com.group50.utils.VisitorAccessUtil;
+import com.group50.utils.ScheduleUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SchedulerController {
 
     @Autowired
-    private VisitorAccessUtil visitorAccessUtil;
+    private ScheduleUtil scheduleUtil;
 
     /**
      * GET请求，接口地址 http://localhost:8080/5619/schedulers/stop
@@ -24,7 +24,7 @@ public class SchedulerController {
      */
     @GetMapping(value = "/stop")
     public Result stopSchedule() {
-        visitorAccessUtil.setPause(true);
+        scheduleUtil.setPause(true);
         return Result.success();
     }
 
@@ -35,7 +35,7 @@ public class SchedulerController {
      */
     @GetMapping(value = "/start")
     public Result startSchedule() {
-        visitorAccessUtil.setPause(false);
+        scheduleUtil.setPause(false);
         return Result.success();
     }
 }
