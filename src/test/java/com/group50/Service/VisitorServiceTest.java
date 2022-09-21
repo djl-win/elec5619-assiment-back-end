@@ -15,6 +15,6 @@ public class VisitorServiceTest {
 
     @Test
     public void testNewFakeVisitor(){
-        visitorService.newFakeVisitor();
+        visitorService.newFakeVisitors();
     }
 }

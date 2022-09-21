@@ -34,9 +34,13 @@ public class ScheduleUtil {
         if(pause) return;
 
         System.out.println("定时任务开始 : " + LocalDateTime.now().toLocalTime() + "\r\n线程 : " + Thread.currentThread().getName());
-        visitService.testThread();
-//        visitService.visitorsAccessSimulation();
-        System.out.println();
+//        visitService.testThread();
+        try {
+            visitService.visitorsAccessSimulation();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        System.out.println();
 
     }
 
