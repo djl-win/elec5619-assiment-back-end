@@ -24,15 +24,15 @@
             timeToIdleSeconds="300"
             timeToLiveSeconds="300"
             memoryStoreEvictionPolicy="LRU"/>
-    <cache
-            name="peopleInfoSpace"
-            eternal="false"
-            diskPersistent="false"
-            maxElementsInMemory="1000"
-            overflowToDisk="false"
-            timeToIdleSeconds="300"
-            timeToLiveSeconds="300"
-            memoryStoreEvictionPolicy="LRU"/>
+<!--    <cache-->
+<!--            name="peopleInfoSpace"-->
+<!--            eternal="false"-->
+<!--            diskPersistent="false"-->
+<!--            maxElementsInMemory="1000"-->
+<!--            overflowToDisk="false"-->
+<!--            timeToIdleSeconds="300"-->
+<!--            timeToLiveSeconds="300"-->
+<!--            memoryStoreEvictionPolicy="LRU"/>-->
     <cache
             name="adminInfoSpace"
             eternal="false"

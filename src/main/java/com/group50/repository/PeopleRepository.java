@@ -13,7 +13,7 @@ public interface PeopleRepository extends JpaRepository<People, Integer> {
      * @param id 用户详细信息的id
      * @return 用户详细信息
      */
-    @Cacheable(value = "peopleInfoSpace", key = "#id")
+//    @Cacheable(value = "peopleInfoSpace", key = "#id")
     People findPeopleByPeopleIdEquals(int id);
 
     /**
