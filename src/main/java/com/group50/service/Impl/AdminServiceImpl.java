@@ -1,6 +1,7 @@
 package com.group50.service.Impl;
 
 import com.alibaba.fastjson.JSON;
+import com.group50.common.AdminThread;
 import com.group50.common.ResultInfo;
 import com.group50.dto.SmsMessage;
 import com.group50.entity.Admin;
@@ -12,6 +13,8 @@ import com.group50.service.AdminService;
 import com.group50.utils.SmsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
@@ -114,6 +117,12 @@ public class AdminServiceImpl implements AdminService {
         Admin newAdmin = adminRepository.save(admin);
 
         return "register successful";
+    }
+
+    @Override
+    public People searchAdminInfo(int adminId) {
+        Admin admin = adminRepository.findAdminByAdminIdEquals(adminId);
+        return peopleRepository.findPeopleByPeopleIdEquals(admin.getAdminPeopleId());
     }
 
 

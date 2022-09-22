@@ -2,6 +2,7 @@ package com.group50.service;
 
 import com.group50.dto.SmsMessage;
 import com.group50.entity.Admin;
+import com.group50.entity.People;
 import com.group50.exception.CustomException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,4 +31,11 @@ public interface AdminService {
      * @return 注册成功信息
      */
     String registerAdmin(String registerDetail);
+
+    /**
+     * 查用当前线程内的管理员的信息，返回给前端
+     * @param adminId 管理员的id
+     * @return 该管理员的详细信息
+     */
+    People searchAdminInfo(int adminId);
 }

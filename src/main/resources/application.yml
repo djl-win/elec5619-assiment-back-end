@@ -40,12 +40,3 @@ spring:
       # 应用关闭时，是否等待定时任务执行完成
       shutdown:
         await-termination: true
-
-
-random:
-  people:
-    peopleName: ${random.value}
-    peopleGender: ${random.int[1,2]}
-    peopleAge: ${random.int[1,80]}
-    peopleEmail: ${random.value}
-    peoplePhone: ${random.int[1000021234567,]}

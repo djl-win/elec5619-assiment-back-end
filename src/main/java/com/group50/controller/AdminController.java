@@ -1,5 +1,6 @@
 package com.group50.controller;
 
+import com.group50.common.AdminThread;
 import com.group50.dto.SmsMessage;
 import com.group50.entity.Admin;
 import com.group50.entity.People;
@@ -53,6 +54,7 @@ public class AdminController {
         int adminId = adminService.checkCode(smsMessage);
         //登录成功后，把用户信息存入session,去拦截器判断是否存在此attribute，存在的话把用户id存入线程，不存在进行拦截
         session.setAttribute("adminId",adminId);
+
         return true;
     }
 
@@ -77,5 +79,17 @@ public class AdminController {
         return adminService.registerAdmin(registerDetail);
     }
 
+    /**
+     * Get请求，接口地址 http://localhost:8080/5619/admins/adminInfo
+     * @param httpServletRequest ###
+     * @return 返回当前登录管理员的个人信息，people表中的
+     */
+    @GetMapping("/adminInfo")
+    public People adminSearch(HttpServletRequest httpServletRequest){
+        HttpSession session = httpServletRequest.getSession();
+        //获取session中的管理员id
+        int adminId = (int) session.getAttribute("adminId");
+        return adminService.searchAdminInfo(adminId);
+    }
 
 }

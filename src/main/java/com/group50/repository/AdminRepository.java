@@ -1,6 +1,7 @@
 package com.group50.repository;
 
 import com.group50.entity.Admin;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -28,4 +29,12 @@ public interface AdminRepository extends JpaRepository<Admin, Integer>{
      * @return 查询的结果
      */
     Admin findAdminByAdminUsernameEquals(String username);
+
+    /**
+     * 查询管理员信息通过管理员的adminId,存储到缓存,避免浪费
+     * @param id 管理员的adminId
+     * @return 管理员的信息
+     */
+    @Cacheable(value = "adminInfoSpace", key = "#id")
+    Admin findAdminByAdminIdEquals(int id);
 }

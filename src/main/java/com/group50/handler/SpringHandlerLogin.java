@@ -30,7 +30,7 @@ public class SpringHandlerLogin implements HandlerInterceptor {
             throw new CustomException(ResultInfo.NON_LOGIN_CODE,ResultInfo.NON_LOGIN_MSG);
         }
         //加载管理员id到线程
-        AdminThread.setCurrentId((Long)adminId);
+//        AdminThread.setCurrentId((Long)adminId);
         return true;
     }
 
