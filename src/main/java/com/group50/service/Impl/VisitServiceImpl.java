@@ -1,5 +1,6 @@
 package com.group50.service.Impl;
 
+import com.group50.dto.HistoryVisitRecord;
 import com.group50.entity.Visit;
 import com.group50.entity.Visitor;
 import com.group50.repository.VenueRepository;
@@ -7,8 +8,10 @@ import com.group50.repository.VisitRepository;
 import com.group50.service.VisitService;
 import com.group50.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -125,6 +128,12 @@ public class VisitServiceImpl implements VisitService {
         }
 
         visitRepository.saveAll(visitsSecond);
+    }
+
+    @Override
+    public List<HistoryVisitRecord> findSevenDaysFlow() {
+
+        return null;
     }
 
 
