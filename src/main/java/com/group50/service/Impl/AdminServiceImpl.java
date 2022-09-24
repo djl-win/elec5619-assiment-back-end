@@ -43,6 +43,7 @@ public class AdminServiceImpl implements AdminService {
         if(adminResult == null){
             throw new CustomException(ResultInfo.NON_EXIST_USER_CODE, ResultInfo.NON_EXIST_USER_MSG);
         }
+
         //4.正确的话就返回验证码到前端
         //4.1 查询用户手机号
         People peopleResult = peopleRepository.findPeopleByPeopleIdEquals(adminResult.getAdminPeopleId());
@@ -90,21 +91,20 @@ public class AdminServiceImpl implements AdminService {
         //1.查询tb_admin表,username存不存在，存在直接返回404
         Admin tempAdmin = adminRepository.findAdminByAdminUsernameEquals(admin.getAdminUsername());
         if(tempAdmin != null){
-            throw new CustomException(ResultInfo.EXIST_USERNAME_CODE,ResultInfo.EXIST_USERNAME_MSG);
+            throw new CustomException(ResultInfo.EXIST_USERNAME_CODE, ResultInfo.EXIST_USERNAME_MSG);
         }
 
         //2.查询tb_people表,Phone存不存在，存在直接返回405
         People tempPeopleOne = peopleRepository.findPeopleByPeoplePhoneEquals(people.getPeoplePhone());
         if(tempPeopleOne != null){
-            throw new CustomException(ResultInfo.EXIST_PHONE_CODE,ResultInfo.EXIST_PHONE_MSG);
+            throw new CustomException(ResultInfo.EXIST_PHONE_CODE, ResultInfo.EXIST_PHONE_MSG);
         }
 
         //3.查询tb_people表,Email存不存在，存在返回406
         People tempPeopleTwo = peopleRepository.findPeopleByPeopleEmailEquals(people.getPeopleEmail());
         if(tempPeopleTwo != null){
-            throw new CustomException(ResultInfo.EXIST_EMAIL_CODE,ResultInfo.EXIST_EMAIL_MSG);
+            throw new CustomException(ResultInfo.EXIST_EMAIL_CODE, ResultInfo.EXIST_EMAIL_MSG);
         }
-
 
         //4.新增一个people记录
         People newPeople = peopleRepository.save(people);

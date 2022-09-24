@@ -16,6 +16,7 @@ https://app.getpostman.com/join-team?invite_code=747aff31872c0821dcf6ab7212a652d
 2. 注册功能完成
 3. 个人信息页面功能完成
 4. 数据模拟功能完成（能凑合用，可以完善）
+5. 查询7日内数据（一半）
 
 
 ###自行插入场馆数据：    

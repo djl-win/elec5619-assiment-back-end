@@ -1,6 +1,5 @@
 package com.group50.controller;
 
-import com.group50.common.AdminThread;
 import com.group50.dto.SmsMessage;
 import com.group50.entity.Admin;
 import com.group50.entity.People;

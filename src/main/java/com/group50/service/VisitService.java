@@ -21,4 +21,5 @@ public interface VisitService {
      * @return 返回数据集合（2022-02-02 38）
      */
     List<HistoryVisitRecord> findSevenDaysFlow();
+
 }
