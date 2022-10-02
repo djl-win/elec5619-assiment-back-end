@@ -7,11 +7,7 @@ import com.group50.repository.VisitRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +20,7 @@ public class VisitRepositoryTest {
     private VisitRepository visitRepository;
 
     @Test
-    public void testConnect(){
+    public void testConnect() {
         Visit visit = new Visit();
         visit.setVisitVisitorId(4);
         visit.setVisitVenueId(1);
@@ -36,7 +32,7 @@ public class VisitRepositoryTest {
     }
 
     @Test
-    public void testFindSevenDaysFlow(){
+    public void testFindSevenDaysFlow() {
         List<Map<String, String>> sevenDaysFlow = visitRepository.findSevenDaysFlow();
         String s = JSON.toJSONString(sevenDaysFlow);
         System.out.println(s);
@@ -50,20 +46,23 @@ public class VisitRepositoryTest {
 
 
     @Test
-    public void testMuseumRealTimeFlow(){
-            System.out.println(visitRepository.findAllByVisitStatusAndVisitDate());
+    public void testMuseumRealTimeFlow() {
+        System.out.println(visitRepository.findAllByVisitStatusAndVisitDate());
 
     }
 
 
     @Test
-    public void testEachVenueFlow(){
-        List<Map<String,String>> venuesFlow=visitRepository.findRealtimePeopleInEachVenue();
-            String s =JSON.toJSONString(venuesFlow);
-            System.out.println(s);
-            //for(int i=0;i<venuesFlow.size();i++) {
-               // System.out.println("Venue Flow :"+"Venue No "+(i+1)+" ;Number "+JSON.parseArray(s).get(i));
-           // }
+    public void testEachVenueFlow() {
+        List<Map<String, String>> venuesFlow = visitRepository.findRealtimePeopleInEachVenue();
+        String s = JSON.toJSONString(venuesFlow);
+        List<HistoryVisitRecord> historyVisitRecords = JSON.parseArray(s, HistoryVisitRecord.class);
+        for (HistoryVisitRecord historyVisitRecord : historyVisitRecords) {
+            System.out.println(historyVisitRecord);
+        }
+        //for(int i=0;i<venuesFlow.size();i++) {
+        // System.out.println("Venue Flow :"+"Venue No "+(i+1)+" ;Number "+JSON.parseArray(s).get(i));
+        // }
 
     }
 }

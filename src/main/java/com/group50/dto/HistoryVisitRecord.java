@@ -9,4 +9,5 @@ import java.util.Date;
 public class HistoryVisitRecord {
     private String date;
     private int visitorNumber;
+    private String venueId;
 }

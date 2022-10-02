@@ -22,6 +22,16 @@ public interface VisitService {
      * @return 返回数据集合（2022-02-02 38）
      */
     List<HistoryVisitRecord> findSevenDaysFlow();
+
+    /**
+     * 查询博物馆内实时人数
+     * @return 返回实时人数
+     */
     int findMuseumRealtimeFlow();
+
+    /**
+     * 查询三个场馆内的实时人数
+     * @return 集合（场馆，人数）
+     */
     List<Map<String,String>> findEachVenueFlow();
 }
