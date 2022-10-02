@@ -1,5 +1,6 @@
 package com.group50.repository;
 
+import com.group50.dto.HistoryVisitRecord;
 import com.group50.entity.Visit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -26,4 +27,9 @@ public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpec
             "\n" +
             "date;",nativeQuery = true)
     List<Map<String,String>> findSevenDaysFlow();
+
+    @Query(value ="SELECT count(*) FROM 'b_visit' WHERE visit_status =1 AND  DATE(visit_date)=curdate()",nativeQuery = true)
+    int findAllByVisitStatusAndVisitDate();
+    @Query(value="SELECT visit_venueid, count(*) FROM 'tb_visit' WHERE visit_status =1 AND DATE(visit_date)= curdate()"+"GROUP BY visit_venueid",nativeQuery = true)
+    List<Map<String,String>> findRealtimePeopleInEachVenue();
 }

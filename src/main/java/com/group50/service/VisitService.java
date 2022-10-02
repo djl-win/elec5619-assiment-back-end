@@ -5,6 +5,7 @@ import com.group50.exception.CustomException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 //@Transactional(timeout = -1, rollbackFor = {Exception.class, CustomException.class})
 public interface VisitService {
@@ -21,5 +22,6 @@ public interface VisitService {
      * @return 返回数据集合（2022-02-02 38）
      */
     List<HistoryVisitRecord> findSevenDaysFlow();
-
+    int findMuseumRealtimeFlow();
+    List<Map<String,String>> findEachVenueFlow();
 }

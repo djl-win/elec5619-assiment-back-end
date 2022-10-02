@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class VisitServiceImpl implements VisitService {
@@ -132,6 +133,16 @@ public class VisitServiceImpl implements VisitService {
     public List<HistoryVisitRecord> findSevenDaysFlow() {
 
         return null;
+    }
+    /*查询博物馆实时的流量*/
+    @Override
+    public int findMuseumRealtimeFlow(){
+        return visitRepository.findAllByVisitStatusAndVisitDate();
+    }
+    /*查询各场馆实时的流量*/
+    @Override
+    public List<Map<String,String>> findEachVenueFlow(){
+        return visitRepository.findRealtimePeopleInEachVenue();
     }
 
 
