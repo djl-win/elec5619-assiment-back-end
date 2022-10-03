@@ -1,5 +1,6 @@
 package com.group50.service.Impl;
 
+import com.alibaba.fastjson.JSON;
 import com.group50.dto.HistoryVisitRecord;
 import com.group50.entity.Visit;
 import com.group50.entity.Visitor;
@@ -129,20 +130,50 @@ public class VisitServiceImpl implements VisitService {
         visitRepository.saveAll(visitsSecond);
     }
 
+    /*查询7日内的流量*/
     @Override
     public List<HistoryVisitRecord> findSevenDaysFlow() {
-
-        return null;
+        List<Map<String, String>> sevenDaysFlow = visitRepository.findSevenDaysFlow();
+        String s = JSON.toJSONString(sevenDaysFlow);
+        return JSON.parseArray(s, HistoryVisitRecord.class);
     }
+
     /*查询博物馆实时的流量*/
     @Override
     public int findMuseumRealtimeFlow(){
         return visitRepository.findAllByVisitStatusAndVisitDate();
     }
+
     /*查询各场馆实时的流量*/
     @Override
-    public List<Map<String,String>> findEachVenueFlow(){
-        return visitRepository.findRealtimePeopleInEachVenue();
+    public List<HistoryVisitRecord> findEachVenueFlow(){
+        List<Map<String, String>> venuesFlow = visitRepository.findRealtimePeopleInEachVenue();
+        String s = JSON.toJSONString(venuesFlow);
+        return JSON.parseArray(s, HistoryVisitRecord.class);
+    }
+    /*查询博物馆当日总流量*/
+    @Override
+    public int searchMuseumTotalFlow() {
+        return visitRepository.findTodayTotalFlow();
+    }
+
+    @Override
+    public List<HistoryVisitRecord> searchTotalFlowInEachVenue() {
+        List<Map<String, String>> venuesFlow = visitRepository.findTotalFlowPeopleInEachVenue();
+        String s = JSON.toJSONString(venuesFlow);
+        return JSON.parseArray(s, HistoryVisitRecord.class);
+    }
+
+    @Override
+    public int searchAllDaysFlowInMuseum() {
+        return visitRepository.findAllDaysFlowInMuseum();
+    }
+
+    @Override
+    public List<HistoryVisitRecord> searchAllDaysFlowInEachVenue() {
+        List<Map<String, String>> venuesFlow = visitRepository.findAllDaysFlowInEachVenue();
+        String s = JSON.toJSONString(venuesFlow);
+        return JSON.parseArray(s, HistoryVisitRecord.class);
     }
 
 

@@ -48,4 +48,39 @@ public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpec
             "where  visit_status = 1 and date(visit_date) = curdate()\n" +
             "GROUP BY visit_venueId",nativeQuery = true)
     List<Map<String,String>> findRealtimePeopleInEachVenue();
+
+    /**
+     * 查询博物馆当日总访问人数
+     * @return 返回当日总访问人数
+     */
+    @Query(value = "SELECT count(DISTINCT visit_visitorId) FROM `tb_visit`\n" +
+            "where date(visit_date) = curdate()\n", nativeQuery = true)
+    int findTodayTotalFlow();
+
+
+    /**
+     * 查询三个场馆内的今日总人数
+     * @return 集合（场馆，人数）
+     */
+    @Query(value="SELECT count(DISTINCT visit_visitorId) as visitorNumber,visit_venueId as venueId FROM tb_visit\n" +
+            "where date(visit_date) = curdate()\n" +
+            "GROUP BY visit_venueId",nativeQuery = true)
+    List<Map<String,String>> findTotalFlowPeopleInEachVenue();
+
+    /**
+     * 查询博物馆历史总访问人数
+     * @return 返回历史总访问人数
+     */
+    @Query(value = "SELECT count(DISTINCT visit_visitorId)\n" +
+            "FROM tb_visit\n",nativeQuery = true)
+    int findAllDaysFlowInMuseum();
+
+    /**
+     * 查询各场馆历史总访问人数
+     * @return 集合（场馆，人数）
+     */
+    @Query(value="SELECT count(DISTINCT visit_visitorId) as visitorNumber, visit_venueId as venueId\n" +
+            "FROM tb_visit\n" +
+            "GROUP BY visit_venueId\n",nativeQuery = true)
+    List<Map<String,String>> findAllDaysFlowInEachVenue();
 }

@@ -1,11 +1,8 @@
 package com.group50.service;
 
 import com.group50.dto.HistoryVisitRecord;
-import com.group50.exception.CustomException;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 //@Transactional(timeout = -1, rollbackFor = {Exception.class, CustomException.class})
 public interface VisitService {
@@ -33,5 +30,29 @@ public interface VisitService {
      * 查询三个场馆内的实时人数
      * @return 集合（场馆，人数）
      */
-    List<Map<String,String>> findEachVenueFlow();
+    List<HistoryVisitRecord> findEachVenueFlow();
+
+    /**
+     * 查询博物馆当日总访问人数
+     * @return 返回当日总访问人数
+     */
+    int searchMuseumTotalFlow();
+
+    /**
+     * 查询博物馆各场馆当日总访问人数
+     * @return 集合（场馆，人数）
+     */
+    List<HistoryVisitRecord> searchTotalFlowInEachVenue();
+
+    /**
+     * 查询博物馆历史总访问人数
+     * @return 返回历史总访问人数
+     */
+    int searchAllDaysFlowInMuseum();
+
+    /**
+     * 查询各场馆历史总访问人数
+     * @return 集合（场馆，人数）
+     */
+    List<HistoryVisitRecord> searchAllDaysFlowInEachVenue();
 }
