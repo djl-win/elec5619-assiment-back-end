@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 @Transactional
@@ -32,4 +33,34 @@ public class PeopleRepositoryTest {
         all.forEach(System.out::println);
 
     }
+    @Test
+    public void testAllPeopleGenderDistribution(){
+        int[] genderDistribution;
+        genderDistribution=peopleRepository.findNumberByPeopleGenderAll();
+        for(int i=0;i<genderDistribution.length;i++)
+        {
+            System.out.println(genderDistribution[i]);
+        }
+    }
+    @Test
+    public void testSevenDaysPeopleGenderDistribution(){
+        int[] genderDistribution;
+        genderDistribution=peopleRepository.findNumberByPeopleGenderSevenDays();
+        for(int i=0;i<genderDistribution.length;i++)
+        {
+            System.out.println(genderDistribution[i]);
+        }
+    }
+    @Test
+    public void testPeopleAgeDistribution(){
+        List<Map<String,Integer>> ageDistribution;
+        ageDistribution=peopleRepository.findNumberByAgeGroups();
+            for (int i=0;i<ageDistribution.size();i++)
+            {
+                System.out.println(ageDistribution.get(i).get("AgeGroup")+" "+ageDistribution.get(i).get("AgeGroupPeople"));
+            }
+
+
+    }
+
 }
