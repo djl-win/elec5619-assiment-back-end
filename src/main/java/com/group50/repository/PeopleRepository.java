@@ -34,18 +34,34 @@ public interface PeopleRepository extends JpaRepository<People, Integer> {
      */
     People findPeopleByPeopleEmailEquals(String peopleEmail);
 
-    @Query(value="select count(*), people_gender from tb_people group by people_gender",nativeQuery = true)
+    /**
+     * 查询访客性别人数分布
+     * @return 数组[男的数量，女的数量]
+     */
+    @Query(value="select count(*), people_gender \n" +
+            "from tb_people \n" +
+            "group by people_gender\n" +
+            "order by people_gender asc",nativeQuery = true)
     int[] findNumberByPeopleGenderAll();
 
-
-    @Query(value ="select count(DISTINCT visit_visitorId), people_gender from \n" +
+    /**
+     * 查询7天内访客性别人数分布
+     * @return 数组[男的数量，女的数量]
+     */
+    @Query(value ="\n" +
+            "select count(DISTINCT visit_visitorId) AS peopleNumber, people_gender from \n" +
             "(select visit_visitorId,visitor_peopleId, people_gender, visit_date\n" +
             "From tb_people a, tb_visitor b, tb_visit c\n" +
             "where c.visit_visitorId=b.visitor_id and a.people_id=b.visitor_peopleId\n" +
             "And DATE_SUB( CURDATE( ), INTERVAL 7 DAY ) <= date(c.visit_date)) as total\n" +
-            "group by people_gender" ,nativeQuery = true)
+            "group by people_gender\n" +
+            "order by people_gender asc" ,nativeQuery = true)
     int[] findNumberByPeopleGenderSevenDays();
 
+    /**
+     * 查询访客年龄区间人数分布
+     * @return 集合（年龄段，数量）
+     */
     @Query(value="SELECT\n" +
             "\tCASE\n" +
             "WHEN people_age IS NULL THEN\n" +
