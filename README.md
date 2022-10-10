@@ -18,8 +18,12 @@ https://app.getpostman.com/join-team?invite_code=747aff31872c0821dcf6ab7212a652d
 4. 数据模拟功能完成（能凑合用，可以完善）
 5. 查询数据接口完成一部分（postman中）
 
+###开启博物馆： http://localhost:8080/5619/schedulers/start
+###关闭博物馆： http://localhost:8080/5619/schedulers/stop
 
 ###自行插入场馆数据：    
 INSERT INTO `tb_venue` VALUES (1, 'venue 1', 'level 1', 'First venue', 300);  
 INSERT INTO `tb_venue` VALUES (2, 'venue 2', 'level 2', 'Second venue', 300);  
 INSERT INTO `tb_venue` VALUES (3, 'venue 2', 'level 3', 'Third venue', 300);  
+
+INSERT INTO `tb_parkinglot` VALUES (1, 'Maar Street', 200, 0);  

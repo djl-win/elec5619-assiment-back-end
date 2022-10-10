@@ -55,4 +55,10 @@ public interface VisitService {
      * @return 集合（场馆，人数）
      */
     List<HistoryVisitRecord> searchAllDaysFlowInEachVenue();
+
+    /**
+     * 查询博物馆容量
+     * @return 容量
+     */
+    int searchMuseumCapacity();
 }

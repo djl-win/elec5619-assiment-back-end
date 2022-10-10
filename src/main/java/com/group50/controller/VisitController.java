@@ -150,4 +150,14 @@ public class VisitController {
     }
 
 
+    /**
+     * 查询博物馆的容量
+     * Get请求，接口地址 http://localhost:8080/5619/visits/capacity
+     * data里面的数据即为博物馆容量
+     * @return 查询成功返回200返回码。未知异常返回100代码。
+     */
+    @GetMapping("/capacity")
+    public int museumCapacity(){
+        return visitService.searchMuseumCapacity();
+    }
 }

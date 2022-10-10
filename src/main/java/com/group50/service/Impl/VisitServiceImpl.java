@@ -176,5 +176,13 @@ public class VisitServiceImpl implements VisitService {
         return JSON.parseArray(s, HistoryVisitRecord.class);
     }
 
+    @Override
+    public int searchMuseumCapacity() {
+        int venue1Capacity = venueRepository.findVenueByVenueIdEquals(1).getVenueCapacity();    //从数据库查询，放入缓存
+        int venue2Capacity = venueRepository.findVenueByVenueIdEquals(2).getVenueCapacity();    //从数据库查询，放入缓存
+        int venue3Capacity = venueRepository.findVenueByVenueIdEquals(3).getVenueCapacity();    //从数据库查询，放入缓存
+        return venue1Capacity+venue2Capacity+venue3Capacity;
+    }
+
 
 }
