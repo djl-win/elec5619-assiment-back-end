@@ -21,6 +21,12 @@ public interface VisitService {
     List<HistoryVisitRecord> findSevenDaysFlow();
 
     /**
+     * 查询7天内venue的流量
+     * @return 返回数据集合（2022-02-02 38）
+     */
+    List<HistoryVisitRecord> findSevenDaysFlowVenue(int venueId);
+
+    /**
      * 查询博物馆内实时人数
      * @return 返回实时人数
      */
@@ -61,4 +67,10 @@ public interface VisitService {
      * @return 容量
      */
     int searchMuseumCapacity();
+
+    /**
+     * 查询博物馆各场馆容量
+     * @return 容量
+     */
+    int searchMuseumCapacityInWhichVenue(int venueId);
 }

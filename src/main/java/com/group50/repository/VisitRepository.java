@@ -5,6 +5,7 @@ import com.group50.entity.Visit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,6 +34,26 @@ public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpec
     List<Map<String,String>> findSevenDaysFlow();
 
     /**
+     * 查询7日内分场馆数据
+     * @return 集合（数据，日期）
+     */
+    @Query(value ="SELECT DATE_FORMAT( b.visit_date, '%Y-%m-%d' ) as date, count(DISTINCT b.visit_visitorId) as visitorNumber\n" +
+            "\n" +
+            "FROM\n" +
+            "\n" +
+            "( SELECT  * FROM tb_visit a\n" +
+            "\n" +
+            "WHERE a.visit_venueid = :venueId and DATE_SUB( CURDATE( ), INTERVAL 7 DAY ) <= date(a.visit_date)\n" +
+            "\n" +
+            ") b\n" +
+            "\n" +
+            "GROUP BY\n" +
+            "\n" +
+            "date;",nativeQuery = true)
+    List<Map<String,String>> findSevenDaysFlowVenue(@Param("venueId")int venueId);
+
+
+    /**
      * 查询博物馆内实时人数
      * @return 返回实时人数
      */
@@ -56,7 +77,6 @@ public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpec
     @Query(value = "SELECT count(DISTINCT visit_visitorId) FROM `tb_visit`\n" +
             "where date(visit_date) = curdate()\n", nativeQuery = true)
     int findTodayTotalFlow();
-
 
     /**
      * 查询三个场馆内的今日总人数

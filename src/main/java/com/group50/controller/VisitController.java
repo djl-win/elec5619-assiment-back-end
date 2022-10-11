@@ -4,6 +4,7 @@ import com.group50.dto.HistoryVisitRecord;
 import com.group50.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +38,26 @@ public class VisitController {
     @GetMapping("/sevendays")
     public List<HistoryVisitRecord> sevenDaysFlow(){
         return visitService.findSevenDaysFlow();
+    }
+
+    /**
+     * 查询近7日各venue的流量
+     * Get请求，接口地址 http://localhost:8080/5619/visits/sevendays/venue/#
+     * {
+     *     "date": "2022-10-02",
+     *     "visitorNumber": 350,
+     *     "venueId": null
+     * },
+     * {
+     *      "date": "2022-10-03",
+     *      "visitorNumber": 33,
+     *      "venueId": null
+     * }
+     * @return 查询成功返回200返回码。未知异常返回100代码。
+     */
+    @GetMapping("/sevendays/venue/{venueId}")
+    public List<HistoryVisitRecord> sevenDaysFlowVenue(@PathVariable int venueId){
+        return visitService.findSevenDaysFlowVenue(venueId);
     }
 
     /**
@@ -159,5 +180,16 @@ public class VisitController {
     @GetMapping("/capacity")
     public int museumCapacity(){
         return visitService.searchMuseumCapacity();
+    }
+
+    /**
+     * 查询博物馆的各场馆容量
+     * Get请求，接口地址 http://localhost:8080/5619/visits/capacity/#
+     * data里面的数据即为博物馆各场馆容量
+     * @return 查询成功返回200返回码。未知异常返回100代码。
+     */
+    @GetMapping("/capacity/{venueId}")
+    public int museumCapacityInVenue(@PathVariable int venueId){
+        return visitService.searchMuseumCapacityInWhichVenue(venueId);
     }
 }

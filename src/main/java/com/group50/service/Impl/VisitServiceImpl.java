@@ -130,10 +130,18 @@ public class VisitServiceImpl implements VisitService {
         visitRepository.saveAll(visitsSecond);
     }
 
-    /*查询7日内的流量*/
+    /*查询7日内的博物馆总流量*/
     @Override
     public List<HistoryVisitRecord> findSevenDaysFlow() {
         List<Map<String, String>> sevenDaysFlow = visitRepository.findSevenDaysFlow();
+        String s = JSON.toJSONString(sevenDaysFlow);
+        return JSON.parseArray(s, HistoryVisitRecord.class);
+    }
+
+    /*查询7日内的各venue流量*/
+    @Override
+    public List<HistoryVisitRecord> findSevenDaysFlowVenue(int venueId) {
+        List<Map<String, String>> sevenDaysFlow = visitRepository.findSevenDaysFlowVenue(venueId);
         String s = JSON.toJSONString(sevenDaysFlow);
         return JSON.parseArray(s, HistoryVisitRecord.class);
     }
@@ -182,6 +190,11 @@ public class VisitServiceImpl implements VisitService {
         int venue2Capacity = venueRepository.findVenueByVenueIdEquals(2).getVenueCapacity();    //从数据库查询，放入缓存
         int venue3Capacity = venueRepository.findVenueByVenueIdEquals(3).getVenueCapacity();    //从数据库查询，放入缓存
         return venue1Capacity+venue2Capacity+venue3Capacity;
+    }
+
+    @Override
+    public int searchMuseumCapacityInWhichVenue(int venueId) {
+        return venueRepository.findVenueByVenueIdEquals(venueId).getVenueCapacity();    //从数据库查询，放入缓存
     }
 
 
