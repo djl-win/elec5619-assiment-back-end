@@ -15,4 +15,9 @@ public interface ParkinglotService {
      */
     Parkinglot findParkinglot();
 
+    /**
+     * 修改停车场容量
+     *
+     */
+    void modifyCapacity(int capacity);
 }

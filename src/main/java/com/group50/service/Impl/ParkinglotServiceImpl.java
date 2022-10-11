@@ -19,4 +19,14 @@ public class ParkinglotServiceImpl implements ParkinglotService {
         Optional<Parkinglot> byId = parkingLotRepository.findById(1);
         return byId.get();
     }
+
+    @Override
+    public void modifyCapacity(int capacity) {
+        Optional<Parkinglot> byId = parkingLotRepository.findById(1);
+        if(byId.isPresent()){
+            Parkinglot parkinglot = byId.get();
+            parkinglot.setParkinglotCapacity(capacity);
+            parkingLotRepository.save(parkinglot);
+        }
+    }
 }

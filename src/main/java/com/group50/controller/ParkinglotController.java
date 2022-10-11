@@ -1,12 +1,9 @@
 package com.group50.controller;
 
 import com.group50.entity.Parkinglot;
-import com.group50.service.AdminService;
 import com.group50.service.ParkinglotService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/parkinglots")
@@ -33,6 +30,18 @@ public class ParkinglotController {
     @GetMapping
     public Parkinglot findParkingLot(){
         return parkinglotService.findParkinglot();
+    }
+
+    /**
+     * put请求，接口地址 http://localhost:8080/5619/parkinglots/modifyCapacity/#
+     * 修改停车场容量停车场信息
+     * @param capacity 要修改的容量
+     * @return 查询成功返回200返回码。未知异常返回100代码。
+     */
+    @PutMapping("/modifyCapacity/{capacity}")
+    public String modifyCapacity(@PathVariable int capacity){
+        parkinglotService.modifyCapacity(capacity);
+        return "Ok";
     }
 
 }

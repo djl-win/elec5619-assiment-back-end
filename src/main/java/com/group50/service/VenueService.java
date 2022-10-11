@@ -8,4 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface VenueService {
 
+    /**
+     * 修改场馆容量
+     * @param venue 前端传入数据
+     */
+    Venue updateCapacity(Venue venue,int venueId);
+
 }

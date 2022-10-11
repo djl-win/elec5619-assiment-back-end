@@ -39,7 +39,7 @@ public class ScheduleUtil {
 
         if(pause) return;
 
-        System.out.println("定时任务开始 : " + LocalDateTime.now().toLocalTime() + "\r\n线程 : " + Thread.currentThread().getName());
+//        System.out.println("定时任务开始 : " + LocalDateTime.now().toLocalTime() + "\r\n线程 : " + Thread.currentThread().getName());
 //        visitService.testThread();
         try {
 
@@ -62,21 +62,24 @@ public class ScheduleUtil {
         if(present){
             int flagA = (int) (Math.random() * 2 + 1);
 
-            System.out.println(flagA);
+//            System.out.println(flagA);
 
             Parkinglot parkinglot = byId.get();
 
             if(parkinglot.getParkinglotCurrentFlow() <= parkinglot.getParkinglotCapacity() && parkinglot.getParkinglotCurrentFlow() >=0) {
                 if(flagA == 1){
                     parkinglot.setParkinglotCurrentFlow(parkinglot.getParkinglotCurrentFlow() + (int) (Math.random() * 5 + 1));
-                }else {
-                    parkinglot.setParkinglotCurrentFlow(parkinglot.getParkinglotCurrentFlow() - (int) (Math.random() * 5 + 1));
+                }else{
+                    int temp = parkinglot.getParkinglotCurrentFlow() - (int) (Math.random() * 5 + 1);
+                    if (temp >= 0) {
+                        parkinglot.setParkinglotCurrentFlow(temp);
+                    }
                 }
             }
             parkingLotRepository.save(parkinglot);
         }
 
-        System.out.println(byId);
+//        System.out.println(byId);
     }
 
 }
