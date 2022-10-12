@@ -90,7 +90,7 @@ public class AdminServiceImpl implements AdminService {
         
         //1.查询tb_admin表,username存不存在，存在直接返回404
         Admin tempAdmin = adminRepository.findAdminByAdminUsernameEquals(admin.getAdminUsername());
-        if(tempAdmin == null){
+        if(tempAdmin != null){
             throw new CustomException(ResultInfo.EXIST_USERNAME_CODE, ResultInfo.EXIST_USERNAME_MSG);
         }
 
@@ -131,10 +131,14 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = JSON.parseObject(updateDetail, Admin.class);
         People people = JSON.parseObject(updateDetail, People.class);
 
+        
+
         //check see if the new name is same as old name, return 407 if yes 
-        Admin tempAdmin = adminRepository.findAdminByAdminIdEquals(admin.getAdminId());
+        Admin tempAdmin = adminRepository.findAdminByAdminPeopleIdEquals(admin.getAdminPeopleId());
         
         String adminUsername = tempAdmin.getAdminUsername();
+        
+        System.out.println(adminUsername);
         //get the people ID for target user
         Integer peopleID = tempAdmin.getAdminPeopleId();
         if(adminUsername.equals(admin.getAdminUsername())){
@@ -153,7 +157,7 @@ public class AdminServiceImpl implements AdminService {
             throw new CustomException(ResultInfo.SAME_EMAIL_CODE, ResultInfo.SAME_EMAIL_MSG);
         }
 
-        //check see if the email is same as old email address, return 409 if yes
+        //check see if the password is same as old password, return 410 if yes
         String peoplePass = tempAdmin.getAdminPassword();
         if(peoplePass.equals(admin.getAdminPassword())){
             throw new CustomException(ResultInfo.SAME_PASS_CODE, ResultInfo.SAME_PASS_MSG);
