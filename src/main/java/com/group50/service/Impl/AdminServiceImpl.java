@@ -153,7 +153,7 @@ public class AdminServiceImpl implements AdminService {
         }
         //check see if the email is same as old email address, return 409 if yes
         String peopleEmail = tempPeople.getPeopleEmail();
-        if(peopleEmail.equals(people.getPeoplePhone())){
+        if(peopleEmail.equals(people.getPeopleEmail())){
             throw new CustomException(ResultInfo.SAME_EMAIL_CODE, ResultInfo.SAME_EMAIL_MSG);
         }
 
@@ -171,7 +171,7 @@ public class AdminServiceImpl implements AdminService {
 
         //update profile
         tempPeople.setPeoplePhone(people.getPeoplePhone());
-        tempPeople.setPeopleEmail(people.getPeopleName());
+        tempPeople.setPeopleEmail(people.getPeopleEmail());
 
         People updatePeople  = peopleRepository.save(tempPeople);
 
