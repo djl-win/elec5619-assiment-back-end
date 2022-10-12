@@ -87,10 +87,10 @@ public class AdminServiceImpl implements AdminService {
 
         Admin admin = JSON.parseObject(registerDetail, Admin.class);
         People people = JSON.parseObject(registerDetail, People.class);
-
+        
         //1.查询tb_admin表,username存不存在，存在直接返回404
         Admin tempAdmin = adminRepository.findAdminByAdminUsernameEquals(admin.getAdminUsername());
-        if(tempAdmin != null){
+        if(tempAdmin == null){
             throw new CustomException(ResultInfo.EXIST_USERNAME_CODE, ResultInfo.EXIST_USERNAME_MSG);
         }
 
@@ -123,6 +123,55 @@ public class AdminServiceImpl implements AdminService {
     public People searchAdminInfo(int adminId) {
         Admin admin = adminRepository.findAdminByAdminIdEquals(adminId);
         return peopleRepository.findPeopleByPeopleIdEquals(admin.getAdminPeopleId());
+    }
+
+
+    @Override
+    public String updateAdmin(String updateDetail) {
+        Admin admin = JSON.parseObject(updateDetail, Admin.class);
+        People people = JSON.parseObject(updateDetail, People.class);
+
+        //check see if the new name is same as old name, return 407 if yes 
+        Admin tempAdmin = adminRepository.findAdminByAdminIdEquals(admin.getAdminId());
+        
+        String adminUsername = tempAdmin.getAdminUsername();
+        //get the people ID for target user
+        Integer peopleID = tempAdmin.getAdminPeopleId();
+        if(adminUsername.equals(admin.getAdminUsername())){
+            throw new CustomException(ResultInfo.SAME_NAME_CODE, ResultInfo.SAME_USERNAME_MSG);
+        }
+
+        //check see if the phone is same as old phone number, return 408 if yes 
+        People tempPeople = peopleRepository.findPeopleByPeopleIdEquals(peopleID);
+        String peoplePhone = tempPeople.getPeoplePhone();
+        if(peoplePhone.equals(people.getPeoplePhone())){
+            throw new CustomException(ResultInfo.SAME_PHONE_CODE, ResultInfo.SAME_PHONE_MSG);
+        }
+        //check see if the email is same as old email address, return 409 if yes
+        String peopleEmail = tempPeople.getPeopleEmail();
+        if(peopleEmail.equals(people.getPeoplePhone())){
+            throw new CustomException(ResultInfo.SAME_EMAIL_CODE, ResultInfo.SAME_EMAIL_MSG);
+        }
+
+        //check see if the email is same as old email address, return 409 if yes
+        String peoplePass = tempAdmin.getAdminPassword();
+        if(peoplePass.equals(admin.getAdminPassword())){
+            throw new CustomException(ResultInfo.SAME_PASS_CODE, ResultInfo.SAME_PASS_MSG);
+        }
+
+        //update user name
+        tempAdmin.setAdminUsername(admin.getAdminUsername());
+        tempAdmin.setAdminPassword(admin.getAdminPassword());
+
+        Admin updateAdmin = adminRepository.save(tempAdmin);
+
+        //update profile
+        tempPeople.setPeoplePhone(people.getPeoplePhone());
+        tempPeople.setPeopleEmail(people.getPeopleName());
+
+        People updatePeople  = peopleRepository.save(tempPeople);
+
+        return "update successful";
     }
 
 

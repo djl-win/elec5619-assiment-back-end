@@ -91,4 +91,22 @@ public class AdminController {
         return adminService.searchAdminInfo(adminId);
     }
 
+    /**
+     * 
+     * Post请求，接口地址 http://localhost:8080/5619/admins/update
+     * {
+     *     "adminUsername" : "dongjiale",
+     *     "peopleEmail" : "395763745@qq.com",
+     *     "peoplePhone" : "15542449708"     
+     *     "adminPassword" : "dongjiale",
+     * }
+     * @param registerDetail 用户注册信息的json格式
+     * @return update成功返回200代码。未知异常返回100代码。
+     */
+    @PostMapping("/update")
+    public String adminUpdate(@RequestBody String updateDetail){
+        return adminService.updateAdmin(updateDetail);
+    }
+
+
 }

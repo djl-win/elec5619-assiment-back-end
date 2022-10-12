@@ -38,4 +38,13 @@ public interface AdminService {
      * @return 该管理员的详细信息
      */
     People searchAdminInfo(int adminId);
+
+    /**
+     * 里面有两个新增操作，在同一个事务中，新增完一个后如果抛出异常，则会回滚。
+     *
+     * update管理员，检验用户名，手机号，邮箱是否存在
+     * @param updateDetail 用户详细update信息
+     * @return update成功信息
+     */
+    String updateAdmin(String updateDetail);
 }
