@@ -1,5 +1,6 @@
 package com.group50.service.Impl;
 
+import com.alibaba.fastjson.JSON;
 import com.github.javafaker.Faker;
 import com.group50.entity.Comment;
 import com.group50.entity.People;
@@ -10,10 +11,13 @@ import com.group50.repository.VisitorRepository;
 import com.group50.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.group50.dto.VisitorRecord;
+import java.util.Map;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.List;
 
 @Service
 public class VisitorServiceImpl implements VisitorService {
@@ -69,4 +73,12 @@ public class VisitorServiceImpl implements VisitorService {
 
         return visitors;
     }
+
+         /*query all visitor record*/
+         @Override
+         public List<VisitorRecord> searchAllVisitorRecord(){
+            List<Map<String, String>> visitorRecord = visitorRepository.findAllVisitor();
+            String s = JSON.toJSONString(visitorRecord);
+            return JSON.parseArray(s, VisitorRecord.class);
+         }
 }
