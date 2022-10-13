@@ -1,8 +1,10 @@
 package com.group50.service.Impl;
 
 import com.github.javafaker.Faker;
+import com.group50.entity.Comment;
 import com.group50.entity.People;
 import com.group50.entity.Visitor;
+import com.group50.repository.CommentRepository;
 import com.group50.repository.PeopleRepository;
 import com.group50.repository.VisitorRepository;
 import com.group50.service.VisitorService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 @Service
@@ -20,6 +23,9 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Autowired
     private PeopleRepository peopleRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Override
     public ArrayList<Visitor> newFakeVisitors() {
@@ -47,6 +53,15 @@ public class VisitorServiceImpl implements VisitorService {
             Visitor visitor = new Visitor();
             visitor.setVisitorPeopleId(newPeopleId);
             visitor.setVisitorVisitTimes(1);
+            //补充，生成一条假的评论
+            Comment fakeComment = new Comment();
+
+            fakeComment.setCommentContent(faker.shakespeare().asYouLikeItQuote());
+            fakeComment.setCommentRank((int) (Math.random() * 5 + 1)); //1-5随机评分
+            fakeComment.setCommentDate(new Date());
+            fakeComment.setCommentPeopleId(newPeopleId);
+            commentRepository.save(fakeComment);
+
 
             //4.新增一个visitor记录，完事
             visitors.add(visitorRepository.save(visitor));

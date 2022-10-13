@@ -1,19 +1,18 @@
 package com.group50.Service;
 
-import com.group50.service.VisitorService;
+import com.group50.service.CommentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-//@Transactional
-public class VisitorServiceTest {
+public class CommentServiceTest {
 
     @Autowired
-    private VisitorService visitorService;
+    private CommentService commentService;
 
     @Test
-    public void testNewFakeVisitor(){
-        visitorService.newFakeVisitors();
+    public void testSearchAllComment(){
+        System.out.println(commentService.searchAllComment());
     }
 }

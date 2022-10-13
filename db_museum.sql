@@ -36,13 +36,14 @@ CREATE TABLE `tb_admin`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_comment`;
 CREATE TABLE `tb_comment`  (
-  `comment_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论表',
-  `comment_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评论内容',
-  `comment_rank` int(11) NULL DEFAULT NULL COMMENT '评分',
-  `comment_peopleId` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`comment_id`) USING BTREE,
-  INDEX `FK_comment_visitorId`(`comment_peopleId`) USING BTREE,
-  CONSTRAINT `FK_comment_peopleId` FOREIGN KEY (`comment_peopleId`) REFERENCES `tb_people` (`people_id`) ON DELETE CASCADE ON UPDATE CASCADE
+`comment_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论表',
+`comment_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评论内容',
+`comment_rank` int(11) NULL DEFAULT NULL COMMENT '评分',
+`comment_date` datetime NULL DEFAULT NULL,
+`comment_peopleId` int(11) NULL DEFAULT NULL,
+PRIMARY KEY (`comment_id`) USING BTREE,
+INDEX `FK_comment_visitorId`(`comment_peopleId`) USING BTREE,
+CONSTRAINT `FK_comment_peopleId` FOREIGN KEY (`comment_peopleId`) REFERENCES `tb_people` (`people_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
