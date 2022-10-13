@@ -70,6 +70,13 @@ CREATE TABLE `tb_parkinglot`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of tb_parkinglot
+-- ----------------------------
+BEGIN;
+INSERT INTO `tb_parkinglot` VALUES (1, 'Mar Street', 250, 211);
+COMMIT;
+
+-- ----------------------------
 -- Table structure for tb_people
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_people`;
@@ -95,6 +102,15 @@ CREATE TABLE `tb_venue`  (
   `venue_capacity` int(11) NULL DEFAULT NULL COMMENT '场馆容量',
   PRIMARY KEY (`venue_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tb_venue
+-- ----------------------------
+BEGIN;
+INSERT INTO `tb_venue` (`venue_id`, `venue_name`, `venue_location`, `venue_description`, `venue_capacity`) VALUES (1, 'venue 1', 'level 1', 'First venue', 300);
+INSERT INTO `tb_venue` (`venue_id`, `venue_name`, `venue_location`, `venue_description`, `venue_capacity`) VALUES (2, 'venue 2', 'level 2', 'Second venue', 300);
+INSERT INTO `tb_venue` (`venue_id`, `venue_name`, `venue_location`, `venue_description`, `venue_capacity`) VALUES (3, 'venue 2', 'level 3', 'Third venue', 300);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for tb_visit
@@ -128,12 +144,3 @@ CREATE TABLE `tb_visitor`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 7907 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;
-
-
--- ----------------------------
--- data
--- ----------------------------
-INSERT INTO tb_venue VALUES (1, 'venue 1', 'level 1', 'First venue', 300);
-INSERT INTO tb_venue VALUES (2, 'venue 2', 'level 2', 'Second venue', 300);
-INSERT INTO tb_venue VALUES (3, 'venue 2', 'level 3', 'Third venue', 300);
-INSERT INTO tb_parkinglot VALUES (1, 'Maar Street', 200, 0);
