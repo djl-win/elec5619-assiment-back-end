@@ -23,7 +23,7 @@ public class VisitorController {
      * {
      *    "peopleId": 32,
      *    "peopleName": Ryan Hills V,
-     *    "people_gender": "1"
+     *    "people_gender": 1
      *    "people_age": 40,
      *    "people_email": LakeSpeed@gmail.com,
      *    "people_phone": +61 9 6232 1502,
