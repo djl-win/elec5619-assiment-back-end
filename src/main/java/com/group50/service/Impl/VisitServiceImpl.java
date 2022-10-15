@@ -197,5 +197,12 @@ public class VisitServiceImpl implements VisitService {
         return venueRepository.findVenueByVenueIdEquals(venueId).getVenueCapacity();    //从数据库查询，放入缓存
     }
 
+    @Override
+    public List<HistoryVisitRecord> searchVenueRecord(int venueId, String startTime, String endTime) {
+
+        List<Map<String, String>> sevenDaysFlow = visitRepository.findVenueRecordByTime(venueId, startTime, endTime);
+        String s = JSON.toJSONString(sevenDaysFlow);
+        return JSON.parseArray(s, HistoryVisitRecord.class);
+    }
 
 }

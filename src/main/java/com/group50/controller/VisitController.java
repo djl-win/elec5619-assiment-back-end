@@ -3,12 +3,10 @@ package com.group50.controller;
 import com.group50.dto.HistoryVisitRecord;
 import com.group50.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 查询关于访问记录的各种信息
@@ -59,6 +57,9 @@ public class VisitController {
     public List<HistoryVisitRecord> sevenDaysFlowVenue(@PathVariable int venueId){
         return visitService.findSevenDaysFlowVenue(venueId);
     }
+
+
+
 
     /**
      * 查询当日博物馆内实时流量
@@ -191,5 +192,29 @@ public class VisitController {
     @GetMapping("/capacity/{venueId}")
     public int museumCapacityInVenue(@PathVariable int venueId){
         return visitService.searchMuseumCapacityInWhichVenue(venueId);
+    }
+
+    /**
+     *
+     * @param map
+     * @return
+     */
+    @RequestMapping("/search/record")
+    @ResponseBody
+    public List<HistoryVisitRecord> searchRecordByTime(@RequestBody Map<String, String> map)
+    {
+        int venueId = 1;
+        String startTime = "",endTime = "";
+        if (map.containsKey("venueId")){
+            venueId = Integer.valueOf(map.get("venueId"));
+        }
+        if (map.containsKey("startTime")){
+            startTime = map.get("startTime");
+        }
+        if (map.containsKey("endTime")){
+            endTime = map.get("endTime");
+        }
+
+        return visitService.searchVenueRecord(venueId, startTime, endTime);
     }
 }

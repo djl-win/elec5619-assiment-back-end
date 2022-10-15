@@ -103,4 +103,27 @@ public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpec
             "FROM tb_visit\n" +
             "GROUP BY visit_venueId\n",nativeQuery = true)
     List<Map<String,String>> findAllDaysFlowInEachVenue();
+
+    /**
+     *
+     * @param venueId
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    @Query(value ="SELECT DATE_FORMAT( b.visit_date, '%Y-%m-%d' ) as date, count(DISTINCT b.visit_visitorId) as visitorNumber\n" +
+            "\n" +
+            "FROM\n" +
+            "\n" +
+            "( SELECT  * FROM tb_visit a\n" +
+            "\n" +
+            "WHERE a.visit_venueid = :venueId " +
+            "and date(a.visit_date) >= date(:startTime) and date(a.visit_date) <= date(:endTime)\n" +
+            "\n" +
+            ") b\n" +
+            "\n" +
+            "GROUP BY\n" +
+            "\n" +
+            "date;",nativeQuery = true)
+    List<Map<String, String>> findVenueRecordByTime(@Param("venueId")int venueId, @Param("startTime")String startTime, @Param("endTime")String endTime);
 }

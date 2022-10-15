@@ -73,4 +73,13 @@ public interface VisitService {
      * @return 容量
      */
     int searchMuseumCapacityInWhichVenue(int venueId);
+
+    /**
+     *
+     * @param venueId
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    List<HistoryVisitRecord> searchVenueRecord(int venueId, String startTime, String endTime);
 }
