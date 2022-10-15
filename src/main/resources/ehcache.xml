@@ -2,9 +2,9 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
          updateCheck="false">
-<!-- 缓存位置 -->
+<!-- cache directory -->
 <!--    <diskStore path="D:\my code\ehcache"/>-->
-<!--    120s过期-->
+<!--    120 s overdue-->
     <cache
         name="SmsCodeSpace"
         eternal="false"

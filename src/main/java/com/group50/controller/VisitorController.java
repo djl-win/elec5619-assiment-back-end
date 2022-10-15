@@ -17,9 +17,10 @@ import java.util.List;
 public class VisitorController {
     @Autowired
     private VisitorService visitorService;
-         /**
-     * 查询当日博物馆内各场馆总流量(不算实时的，算总的)
-     * Get请求，接口地址 http://localhost:8080/5619/visitor/visitorRecord
+
+    /**
+     * Query the total flow rate of each venue in the museum on that day (not real time, count as total)
+     * Get，address: http://localhost:8080/5619/visitor/visitorRecord
      * {
      *    "peopleId": 32,
      *    "peopleName": Ryan Hills V,
@@ -30,7 +31,7 @@ public class VisitorController {
      *    "visit_date": 2022-10-03 20:31:23,
      *    "visit_duration": 20,
      * },
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/visitorRecord")
     public List<VisitorRecord> visitorRecord(){

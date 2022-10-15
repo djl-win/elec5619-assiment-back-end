@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 查询关于访问记录的各种信息
+ * Query various information about access records
  */
 @RestController
 @RequestMapping("/visits")
@@ -19,8 +19,8 @@ public class VisitController {
     private VisitService visitService;
 
     /**
-     * 查询近7日的流量
-     * Get请求，接口地址 http://localhost:8080/5619/visits/sevendays
+     * Query information about access records. Query the traffic of the last 7 days
+     * Get，address: http://localhost:8080/5619/visits/sevendays
      * {
      *     "date": "2022-10-02",
      *     "visitorNumber": 350,
@@ -31,7 +31,7 @@ public class VisitController {
      *      "visitorNumber": 33,
      *      "venueId": null
      * }
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/sevendays")
     public List<HistoryVisitRecord> sevenDaysFlow(){
@@ -39,8 +39,8 @@ public class VisitController {
     }
 
     /**
-     * 查询近7日各venue的流量
-     * Get请求，接口地址 http://localhost:8080/5619/visits/sevendays/venue/#
+     * Query the traffic of each venue in the last 7 days
+     * Get，address: http://localhost:8080/5619/visits/sevendays/venue/#
      * {
      *     "date": "2022-10-02",
      *     "visitorNumber": 350,
@@ -51,7 +51,7 @@ public class VisitController {
      *      "visitorNumber": 33,
      *      "venueId": null
      * }
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/sevendays/venue/{venueId}")
     public List<HistoryVisitRecord> sevenDaysFlowVenue(@PathVariable int venueId){
@@ -62,10 +62,10 @@ public class VisitController {
 
 
     /**
-     * 查询当日博物馆内实时流量
-     * Get请求，接口地址 http://localhost:8080/5619/visits/today/totalrealtimeflow
-     * data里面的数据即为博物馆内实时人数
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * Query real-time traffic in the museum on that day
+     * Get，address: http://localhost:8080/5619/visits/today/totalrealtimeflow
+     * The data in data is the real-time number of people in the museum
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/today/totalrealtimeflow")
     public int todayTotalRealtimeFlow(){
@@ -73,8 +73,8 @@ public class VisitController {
     }
 
     /**
-     * 查询当日博物馆各场馆内实时流量
-     * Get请求，接口地址 http://localhost:8080/5619/visits/today/eachvenuerealtimeflow
+     * Query the real-time traffic in each venue of the museum on that day
+     * Get, address: http://localhost:8080/5619/visits/today/eachvenuerealtimeflow
      * {
      *       "date": null,
      *       "visitorNumber": 12,
@@ -90,7 +90,7 @@ public class VisitController {
      *         "visitorNumber": 2,
      *         "venueId": "3"
      * }
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/today/eachvenuerealtimeflow")
     public List<HistoryVisitRecord> todayEachVenueRealtimeFlow(){
@@ -100,10 +100,10 @@ public class VisitController {
 
 
     /**
-     * 查询当日博物馆内总流量(不算实时的，算总的)
-     * Get请求，接口地址 http://localhost:8080/5619/visits/today/totalflow
+     * Query the total flow of the museum on that day (not real time, total)
+     * Get，address: http://localhost:8080/5619/visits/today/totalflow
      * data里面的数据即为博物馆内总人数
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/today/totalflow")
     public int todayTotalFlow(){
@@ -111,8 +111,8 @@ public class VisitController {
     }
 
     /**
-     * 查询当日博物馆内各场馆总流量(不算实时的，算总的)
-     * Get请求，接口地址 http://localhost:8080/5619/visits/today/eachvenuetotalflow
+     * Query the total flow rate of each venue in the museum on that day (not real time, count as total)
+     * Get，address: http://localhost:8080/5619/visits/today/eachvenuetotalflow
      * {
      *    "date": null,
      *    "visitorNumber": 127,
@@ -128,7 +128,7 @@ public class VisitController {
      *      "visitorNumber": 116,
      *      "venueId": "3"
      *   }
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/today/eachvenuetotalflow")
     public List<HistoryVisitRecord> todayEachVenueTotalFlow(){
@@ -136,10 +136,10 @@ public class VisitController {
     }
 
     /**
-     * 查询博物馆历史所有访问流量
-     * Get请求，接口地址 http://localhost:8080/5619/visits/alldays/museumflow
-     * data里面的数据即为历史访问博物馆的总人数
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * Query all access traffic in the museum's history
+     * Get，address: http://localhost:8080/5619/visits/alldays/museumflow
+     * The data in data refers to the total number of visitors to the museum in history
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/alldays/museumflow")
     public int allDaysMuseumFlow(){
@@ -147,8 +147,8 @@ public class VisitController {
     }
 
     /**
-     * 查询博物馆历史各场馆所有所有访问流量
-     * Get请求，接口地址 http://localhost:8080/5619/visits/alldays/eachvenueflow
+     * Query the history of the museum all all access traffic of each venue
+     * Get，address: http://localhost:8080/5619/visits/alldays/eachvenueflow
      * {
      *     "date": null,
      *     "visitorNumber": 577,
@@ -164,7 +164,7 @@ public class VisitController {
      *       "visitorNumber": 573,
      *       "venueId": "3"
      *    }
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/alldays/eachvenueflow")
     public List<HistoryVisitRecord> allDaysEachVenueFlow(){
@@ -173,10 +173,10 @@ public class VisitController {
 
 
     /**
-     * 查询博物馆的容量
-     * Get请求，接口地址 http://localhost:8080/5619/visits/capacity
-     * data里面的数据即为博物馆容量
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * Query the museum's capacity
+     * Get，address: http://localhost:8080/5619/visits/capacity
+     * The data in data is the museum capacity
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/capacity")
     public int museumCapacity(){
@@ -184,10 +184,10 @@ public class VisitController {
     }
 
     /**
-     * 查询博物馆的各场馆容量
-     * Get请求，接口地址 http://localhost:8080/5619/visits/capacity/#
-     * data里面的数据即为博物馆各场馆容量
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * Query the capacity of the museum
+     * Get，address: http://localhost:8080/5619/visits/capacity/#
+     * The data in data refers to the capacity of each venue in the museum
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/capacity/{venueId}")
     public int museumCapacityInVenue(@PathVariable int venueId){
@@ -197,7 +197,7 @@ public class VisitController {
     /**
      *
      * @param map
-     * @return
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @RequestMapping("/search/record")
     @ResponseBody

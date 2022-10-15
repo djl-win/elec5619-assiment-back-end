@@ -15,7 +15,7 @@ public class PeopleServiceImpl implements PeopleService {
     @Autowired
     private PeopleRepository peopleRepository;
 
-    /*查询不同年龄区间的人数*/
+    /* Query the number of people in different age ranges */
     @Override
     public int[] peopleAgeDistribution(){
         int[] ageGroup= new int[4];
@@ -26,12 +26,14 @@ public class PeopleServiceImpl implements PeopleService {
         }
         return ageGroup;
     }
-    /*查询7日不同性别的人数*/
+
+    /* Query the number of different genders on the 7th day */
     @Override
     public int[] peopleGenderDistributionSevenDays(){
         return peopleRepository.findNumberByPeopleGenderSevenDays();
     }
-    /*查询不同性别的所有人数*/
+
+    /* Query all persons of different genders */
     @Override
     public int[] peopleGenderDistributionAll(){
         return peopleRepository.findNumberByPeopleGenderAll();

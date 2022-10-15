@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
- * 定时添加游客到数据库的工具类，提供访问信息
- * 八个线程，一个线程执行40s，6秒开启一个线程
+ * Regularly add visitors to the database tool class, provide access to information
+ * Eight threads, each thread executes 40s, 6 seconds to start a thread
  */
 @Component
 @EnableScheduling
@@ -30,7 +30,7 @@ public class ScheduleUtil {
     @Autowired
     private ParkingLotRepository parkingLotRepository;
 
-    //控制定时器的开始或关闭，这里设计的不是很好，因为这些线程总是被占用着的，有时间再优化，先这样
+    //Control timer start or close, this is not a very good design, because these threads are always occupied
     private boolean pause = true;
 
     @Async
@@ -39,20 +39,17 @@ public class ScheduleUtil {
 
         if(pause) return;
 
-//        System.out.println("定时任务开始 : " + LocalDateTime.now().toLocalTime() + "\r\n线程 : " + Thread.currentThread().getName());
-//        visitService.testThread();
         try {
 
             visitService.visitorsAccessSimulation();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        System.out.println();
 
     }
 
     /**
-     * 模拟汽车进入
+     * Simulated car entry
      */
     @Scheduled(fixedDelay = 10000)
     public void vehicleSimulate(){

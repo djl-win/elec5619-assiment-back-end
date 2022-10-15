@@ -10,43 +10,46 @@ import org.springframework.web.bind.annotation.RestController;
 public class PeopleController {
     @Autowired
     private PeopleService peopleService;
+
     /**
-     * 查询访客性别相关的用户画像
-     * Get请求，接口地址 http://localhost:8080/5619/people/genderPortrait/all
+     * Query for gender-specific user profiles of visitors
+     * Get，address: http://localhost:8080/5619/people/genderPortrait/all
      * {
      * "data": [
-     *  （男）2345,
-     *  （女） 2248
+     *  （boy）2345,
+     *  （girl） 2248
      *  ],
      * "code": 200,
      * "msg": "Success"
      }
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/genderPortrait/all")
     public int[] genderDistributionAll(){
         return peopleService.peopleGenderDistributionAll();
     }
+
     /**
-     * 查询7天内访客性别相关的用户画像
-     * Get请求，接口地址 http://localhost:8080/5619/people/genderPortrait/all
+     * Query gender-specific profiles of visitors within 7 days
+     * Get，address: http://localhost:8080/5619/people/genderPortrait/all
      * {
      * "data": [
-     *  （男）364,
-     *  （女）363
+     *  （boy）364,
+     *  （girl）363
      *  ],
      * "code": 200,
      * "msg": "Success"
      }
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/genderPortrait/sevendays")
     public int[] genderDistributionSevenday(){
         return peopleService.peopleGenderDistributionSevenDays();
     }
+
     /**
-     * 查询访客年龄相关的用户画像
-     * Get请求，接口地址 http://localhost:8080/5619/people/genderPortrait/all
+     * Query the user profile related to the visitor's age
+     * Get，address: http://localhost:8080/5619/people/genderPortrait/all
      * {
      * "data": [
      *  （0-18）1055,
@@ -57,7 +60,7 @@ public class PeopleController {
      * "code": 200,
      * "msg": "Success"
      }
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/agePortrait")
     public int[] ageDistribution(){

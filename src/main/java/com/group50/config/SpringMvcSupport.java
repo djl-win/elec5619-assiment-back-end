@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 处理拦截器等操作（拦截器写在了handler中）
+ * Handling operations such as interceptors (which are written in handler)
  */
 @Configuration
 public class SpringMvcSupport implements WebMvcConfigurer {
@@ -18,7 +18,6 @@ public class SpringMvcSupport implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//未启用拦截，等页面搞好再看看
 //        registry.addInterceptor(springHandlerLogin)
 //                .addPathPatterns("/**")
 //                .excludePathPatterns("/pages/index.html");

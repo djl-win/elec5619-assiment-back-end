@@ -8,14 +8,14 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
- * 校验用户输入是否有空格，如果有则帮其trim
+ * Checks user input for whitespace and trim it if so
  */
 @Component
 @Aspect
 public class SpringHandlerAdminInput {
 
     /**
-     * 所有的方法 pointcut
+     * All methods pointcut
      */
     @Pointcut("execution(* com.*.service.AdminService.*(..))")
     private void loginPt(){};

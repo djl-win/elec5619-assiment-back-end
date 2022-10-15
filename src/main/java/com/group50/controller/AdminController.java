@@ -19,13 +19,13 @@ public class AdminController {
     private AdminService adminService;
 
     /**
-     * PUT请求，接口地址 http://localhost:8080/5619/admins/login
+     * PUT，address: http://localhost:8080/5619/admins/login
      * {
      *    "adminUsername" : "admin",
      *    "adminPassword" : "admin"
      * }
-     * @param admin 用户名和密码的json格式，详见接口文档
-     * @return 用户验证正确返回200返回码，以及用户登录验证码信息。用户名错误返回401代码。未知异常返回100代码。
+     * @param admin For the json format of the username and password, see the interface documentation
+     * @return If user verification is correct, 200 return code and login verification code are returned. Username error returns 401 code. Unknown exception returns 100 code.
      */
     @PutMapping("/login")
     public String adminLogin(@RequestBody Admin admin, HttpServletRequest httpServletRequest){
@@ -37,30 +37,28 @@ public class AdminController {
     }
 
     /**
-     * Get请求，接口地址 http://localhost:8080/5619/admins/login/verify/#
-     * @param  code 用户输入的验证码
-     * @return 用户输入正确的验证码返回200返回码。验证码输入失败返回402代码。未知异常返回100代码。
+     * Get，address http://localhost:8080/5619/admins/login/verify/#
+     * @param  code Verification code entered by the user
+     * @return If the user enters a correct verification code, 200 is returned. If the verification code fails to be entered, code 402 is returned. Unknown exception returns 100 code.
      */
     @GetMapping("/login/verify/{code}")
     public Boolean adminLoginVerify(@PathVariable String code, HttpServletRequest httpServletRequest){
         HttpSession session = httpServletRequest.getSession();
-        //获取session中的手机号
+        //get the phone in session
         People admin = (People) session.getAttribute("people");
         SmsMessage smsMessage = new SmsMessage();
         smsMessage.setPeople(admin);
         smsMessage.setCode(code);
-        //进行判断操作
         int adminId = adminService.checkCode(smsMessage);
-        //登录成功后，把用户信息存入session,去拦截器判断是否存在此attribute，存在的话把用户id存入线程，不存在进行拦截
+        //After the login is successful, the user information is saved into the session, and the interceptor checks whether the attribute exists. If the attribute exists, the user id is saved into the thread, but not intercepted
         session.setAttribute("adminId",adminId);
 
         return true;
     }
 
     /**
-     * 优化--加上手机号数字验证，和邮箱格式验证，前后端都可--aop中trim用户的输入
      *
-     * Post请求，接口地址 http://localhost:8080/5619/admins/register
+     * Post，address: http://localhost:8080/5619/admins/register
      * {
      *     "adminUsername" : "dongjiale",
      *     "adminPassword" : "dongjiale",
@@ -70,8 +68,8 @@ public class AdminController {
      *     "peopleEmail" : "395763745@qq.com",
      *     "peoplePhone" : "15542449708"
      * }
-     * @param registerDetail 用户注册信息的json格式
-     * @return 注册成功返回200代码。用户名已存在返回404代码。手机号已存在返回405代码。邮箱已存在返回406代码。未知异常返回100代码。
+     * @param registerDetail User registration information in json format
+     * @return 200 code is returned on successful registration. A 404 code is returned if the username already exists. Phone number already exists return 405 code. Mailbox already exists returns 406 code. Unknown exception returns 100 code.
      */
     @PostMapping("/register")
     public String adminRegister(@RequestBody String registerDetail){
@@ -93,15 +91,15 @@ public class AdminController {
 
     /**
      * 
-     * Post请求，接口地址 http://localhost:8080/5619/admins/update
+     * Post，address: http://localhost:8080/5619/admins/update
      * {
      *     "adminUsername" : "dongjiale",
      *     "peopleEmail" : "395763745@qq.com",
      *     "peoplePhone" : "15542449708"     
      *     "adminPassword" : "dongjiale",
      * }
-     * @param registerDetail 用户注册信息的json格式
-     * @return update成功返回200代码。未知异常返回100代码。
+     * @param updateDetail User registration information in json format
+     * @return update returns 200 code on success. Unknown exception returns 100 code.
      */
     @PostMapping("/update")
     public String adminUpdate(@RequestBody String updateDetail){

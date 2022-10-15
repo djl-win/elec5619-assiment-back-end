@@ -10,30 +10,30 @@ public interface AdminRepository extends JpaRepository<Admin, Integer>{
 
     /**
      * method name must match fields of entities
-     * @param username 用户名
-     * @param password 密码
-     * @return 用户详细信息
+     * @param username username
+     * @param password password
+     * @return user info
      */
     Admin findByAdminUsernameAndAdminPassword(String username,String password);
 
     /**
-     * 查询管理员id通过管理员的peopleId
-     * @param id 管理员的peopleId
-     * @return 管理员的id
+     * The administrator id is queried through peopleId of the administrator
+     * @param id admin's peopleId
+     * @return admin's id
      */
     Admin findAdminByAdminPeopleIdEquals(int id);
 
     /**
-     * 通过管理员用户名查询
-     * @param username 用户名
-     * @return 查询的结果
+     * The value can be queried by the administrator username
+     * @param username username
+     * @return result
      */
     Admin findAdminByAdminUsernameEquals(String username);
 
     /**
-     * 查询管理员信息通过管理员的adminId,存储到缓存,避免浪费
-     * @param id 管理员的adminId
-     * @return 管理员的信息
+     * The administrator information is queried through the administrator adminId and stored in the cache to avoid waste
+     * @param id admin's dminId
+     * @return admin info
      */
     @Cacheable(value = "adminInfoSpace", key = "#id")
     Admin findAdminByAdminIdEquals(int id);

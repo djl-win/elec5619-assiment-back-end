@@ -15,8 +15,8 @@ import java.util.Map;
 public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpecificationExecutor<Visit> {
 
     /**
-     * 查询7日内数据
-     * @return 集合（数据，日期）
+     * Query the data of the last 7 days
+     * @return List (data, date)
      */
     @Query(value ="SELECT DATE_FORMAT( b.visit_date, '%Y-%m-%d' ) as date, count(DISTINCT b.visit_visitorId) as visitorNumber\n" +
             "\n" +
@@ -34,8 +34,8 @@ public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpec
     List<Map<String,String>> findSevenDaysFlow();
 
     /**
-     * 查询7日内分场馆数据
-     * @return 集合（数据，日期）
+     * Query venue data within 7 days
+     * @return List (data, date)
      */
     @Query(value ="SELECT DATE_FORMAT( b.visit_date, '%Y-%m-%d' ) as date, count(DISTINCT b.visit_visitorId) as visitorNumber\n" +
             "\n" +
@@ -54,16 +54,16 @@ public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpec
 
 
     /**
-     * 查询博物馆内实时人数
-     * @return 返回实时人数
+     * Query the real-time number of people in the museum
+     * @return Return real-time number of people
      */
     @Query(value ="SELECT count(*)  FROM `tb_visit`\n" +
             "where visit_status = 1 and date(visit_date) = curdate()",nativeQuery = true)
     int findAllByVisitStatusAndVisitDate();
 
     /**
-     * 查询三个场馆内的实时人数
-     * @return 集合（场馆，人数）
+     * Query the real-time number of people in the three venues
+     * @return List (venue, number of persons)
      */
     @Query(value="SELECT count(*) as visitorNumber, visit_venueId as venueId FROM `tb_visit`\n" +
             "where  visit_status = 1 and date(visit_date) = curdate()\n" +
@@ -71,16 +71,16 @@ public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpec
     List<Map<String,String>> findRealtimePeopleInEachVenue();
 
     /**
-     * 查询博物馆当日总访问人数
-     * @return 返回当日总访问人数
+     * Query the total number of museum visitors on that day
+     * @return Returns total number of visitors for the day
      */
     @Query(value = "SELECT count(DISTINCT visit_visitorId) FROM `tb_visit`\n" +
             "where date(visit_date) = curdate()\n", nativeQuery = true)
     int findTodayTotalFlow();
 
     /**
-     * 查询三个场馆内的今日总人数
-     * @return 集合（场馆，人数）
+     * Check today's total attendance at the three venues
+     * @return List (venue, number of persons)
      */
     @Query(value="SELECT count(DISTINCT visit_visitorId) as visitorNumber,visit_venueId as venueId FROM tb_visit\n" +
             "where date(visit_date) = curdate()\n" +
@@ -88,16 +88,16 @@ public interface VisitRepository  extends JpaRepository<Visit, Integer>, JpaSpec
     List<Map<String,String>> findTotalFlowPeopleInEachVenue();
 
     /**
-     * 查询博物馆历史总访问人数
-     * @return 返回历史总访问人数
+     * Query the total number of historical museum visitors
+     * @return Returns the historical total number of visitors
      */
     @Query(value = "SELECT count(DISTINCT visit_visitorId)\n" +
             "FROM tb_visit\n",nativeQuery = true)
     int findAllDaysFlowInMuseum();
 
     /**
-     * 查询各场馆历史总访问人数
-     * @return 集合（场馆，人数）
+     * Query the total number of historical visitors of each venue
+     * @return List (venue, number of persons)
      */
     @Query(value="SELECT count(DISTINCT visit_visitorId) as visitorNumber, visit_venueId as venueId\n" +
             "FROM tb_visit\n" +

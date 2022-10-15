@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 拦截自定义异常（在exception包下）
+ * Intercepting custom exceptions (under the exception package)
  */
 @RestControllerAdvice
 public class SpringHandlerException {

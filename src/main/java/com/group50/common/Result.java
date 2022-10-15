@@ -3,8 +3,8 @@ package com.group50.common;
 import lombok.Data;
 
 /**
- * 封装返回结果
- * @param <T> 自定义返回值data类型
+ * Encapsulate the return result
+ * @param <T> Custom return value data type
  */
 @Data
 public class Result<T> {

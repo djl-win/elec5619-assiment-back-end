@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 处理未封装的返回结果（handler中写出，这里进行注册）
+ * Handling unwrapped return results (written in handler, registered here)
  */
 @Configuration
 public class ReturnValueConfig implements InitializingBean {

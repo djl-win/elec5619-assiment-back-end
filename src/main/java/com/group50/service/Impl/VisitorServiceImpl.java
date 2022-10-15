@@ -34,40 +34,40 @@ public class VisitorServiceImpl implements VisitorService {
     @Override
     public ArrayList<Visitor> newFakeVisitors() {
 
-        //生成随机1-20条假的用户数据
+        //Generate random 1-20 fake user data
         Faker faker = new Faker(new Locale("en-AU"));
         int visitNumbers = (int) (Math.random() * 20 + 1);
         ArrayList<Visitor> visitors = new ArrayList<>();
 
         for (int i = 0; i < visitNumbers; i++) {
 
-            //1.生成一个随机people的记录，先插入到数据库
+            //1.Generate a random people record and insert it into the database
             People fakePeople = new People();
             fakePeople.setPeopleName(faker.name().name());
-            fakePeople.setPeopleGender((int) (Math.random() * 2 + 1)); //1,2的随机年龄
-            fakePeople.setPeopleAge((int) (Math.random() * 80 + 1)); //1-80岁的人
+            fakePeople.setPeopleGender((int) (Math.random() * 2 + 1)); //The random gender of 1,2
+            fakePeople.setPeopleAge((int) (Math.random() * 80 + 1)); //1-80 year
             fakePeople.setPeopleEmail(faker.funnyName().name().replace(" ", "").replace(".", "") + "@gmail.com");
             fakePeople.setPeoplePhone(faker.phoneNumber().phoneNumber());
 
-            //2.插入这个假数据到数据库
+            //2.Insert the fake data into the database
             People newPeople = peopleRepository.save(fakePeople);
 
-            //3.获取新增people的id，当作visitor的外键
+            //3.Get the id of the new people as the foreign key to the visitor
             int newPeopleId = newPeople.getPeopleId();
             Visitor visitor = new Visitor();
             visitor.setVisitorPeopleId(newPeopleId);
             visitor.setVisitorVisitTimes(1);
-            //补充，生成一条假的评论
+
             Comment fakeComment = new Comment();
 
             fakeComment.setCommentContent(faker.shakespeare().asYouLikeItQuote());
-            fakeComment.setCommentRank((int) (Math.random() * 5 + 1)); //1-5随机评分
+            fakeComment.setCommentRank((int) (Math.random() * 5 + 1)); //1-5 Random score
             fakeComment.setCommentDate(new Date());
             fakeComment.setCommentPeopleId(newPeopleId);
             commentRepository.save(fakeComment);
 
 
-            //4.新增一个visitor记录，完事
+            //4.Add a visitor record
             visitors.add(visitorRepository.save(visitor));
         }
 

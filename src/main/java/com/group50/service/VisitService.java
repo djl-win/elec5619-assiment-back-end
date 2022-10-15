@@ -10,67 +10,67 @@ public interface VisitService {
     void testThread();
 
     /**
-     * 模拟游客的访问操作
+     * Simulate the visitor's visit operation
      */
     void visitorsAccessSimulation() throws InterruptedException;
 
     /**
-     * 查询7天内的流量
-     * @return 返回数据集合（2022-02-02 38）
+     * Query the traffic within the last 7 days
+     * @return Return data list（2022-02-02 38）
      */
     List<HistoryVisitRecord> findSevenDaysFlow();
 
     /**
-     * 查询7天内venue的流量
-     * @return 返回数据集合（2022-02-02 38）
+     * Query the venue's traffic within 7 days
+     * @return Return data list（2022-02-02 38）
      */
     List<HistoryVisitRecord> findSevenDaysFlowVenue(int venueId);
 
     /**
-     * 查询博物馆内实时人数
-     * @return 返回实时人数
+     * Query the real-time number of people in the museum
+     * @return Return real-time number of people
      */
     int findMuseumRealtimeFlow();
 
     /**
-     * 查询三个场馆内的实时人数
-     * @return 集合（场馆，人数）
+     * Query the real-time number of people in the three venues
+     * @return List(venue, number of persons)
      */
     List<HistoryVisitRecord> findEachVenueFlow();
 
     /**
-     * 查询博物馆当日总访问人数
-     * @return 返回当日总访问人数
+     * Query the total number of museum visitors on that day
+     * @return Returns total number of visitors for the day
      */
     int searchMuseumTotalFlow();
 
     /**
-     * 查询博物馆各场馆当日总访问人数
-     * @return 集合（场馆，人数）
+     * To query the total number of visitors to the museum on that day
+     * @return List(venue, number of persons)
      */
     List<HistoryVisitRecord> searchTotalFlowInEachVenue();
 
     /**
-     * 查询博物馆历史总访问人数
-     * @return 返回历史总访问人数
+     * Query the total number of historical museum visitors
+     * @return Returns the historical total number of visitors
      */
     int searchAllDaysFlowInMuseum();
 
     /**
-     * 查询各场馆历史总访问人数
-     * @return 集合（场馆，人数）
+     * Query the total number of historical visitors of each venue
+     * @return List(venue, number of persons)
      */
     List<HistoryVisitRecord> searchAllDaysFlowInEachVenue();
 
     /**
-     * 查询博物馆容量
-     * @return 容量
+     * Querying Museum Capacity
+     * @return capacity
      */
     int searchMuseumCapacity();
 
     /**
-     * 查询博物馆各场馆容量
-     * @return 容量
+     * Query the capacity of museums
+     * @return capacity
      */
     int searchMuseumCapacityInWhichVenue(int venueId);
 

@@ -3,18 +3,18 @@ package com.group50.service;
 public interface PeopleService {
 
     /**
-     * 查询访客年龄区间人数分布
-     * @return 数组[0-18岁的人数，19-35岁的人数，36-60岁的人数，60+的人数]
+     * Query the age distribution of visitors
+     * @return Array [Number of people aged 0-18, number of people aged 19-35, number of people aged 36-60, number of people aged 60+]
      */
     int[] peopleAgeDistribution();
     /**
-     * 查询7天内访客性别人数分布
-     * @return 数组[男的数量，女的数量]
+     * Query the gender distribution of visitors within 7 days
+     * @return Array [number of men, number of women]
      */
     int[] peopleGenderDistributionSevenDays();
     /**
-     * 查询访客性别人数分布
-     * @return 数组[男的数量，女的数量]
+     * Query the gender distribution of visitors
+     * @return Array [number of men, number of women]
      */
     int[] peopleGenderDistributionAll();
 }

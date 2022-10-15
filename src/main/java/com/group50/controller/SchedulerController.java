@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 控制定时器的启动和停止，点击按钮就开始定时器插入游客数据
+ * Control timer start and stop, click the button to start timer insert visitor data
  */
 @RestController
 @RequestMapping("/schedulers")
@@ -18,9 +18,9 @@ public class SchedulerController {
     private ScheduleUtil scheduleUtil;
 
     /**
-     * GET请求，接口地址 http://localhost:8080/5619/schedulers/stop
+     * GET，address http://localhost:8080/5619/schedulers/stop
      *
-     * @return 定时器关闭成功返回200返回码。未知异常返回100代码。
+     * @return The timer is successfully shut down. 200 Return code is displayed. Unknown exception returns 100 code.
      */
     @GetMapping(value = "/stop")
     public Result stopSchedule() {
@@ -29,9 +29,9 @@ public class SchedulerController {
     }
 
     /**
-     * GET请求，接口地址 http://localhost:8080/5619/schedulers/start
+     * GET，address: http://localhost:8080/5619/schedulers/start
      *
-     * @return 定时器开启成功返回200返回码。未知异常返回100代码。
+     * @return The timer is successfully started. 200 Return code is displayed. Unknown exception returns 100 code.
      */
     @GetMapping(value = "/start")
     public Result startSchedule() {

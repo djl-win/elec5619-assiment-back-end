@@ -10,8 +10,8 @@ import java.util.List;
 @Transactional(timeout = -1, rollbackFor = {Exception.class, CustomException.class})
 public interface CommentService {
     /**
-     * 查询所有的评论
-     * @return 评论的集合
+     * Query all comments
+     * @return A collection of reviews
      */
     List<CommentRecord> searchAllComment();
 }

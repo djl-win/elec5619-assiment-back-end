@@ -7,7 +7,7 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
- * 处理未封装的返回结果，不使用Result也可直接返回
+ * Process unwrapped return results, which can be returned without using Result class
  */
 public class SpringHandlerReturnValue implements HandlerMethodReturnValueHandler {
 

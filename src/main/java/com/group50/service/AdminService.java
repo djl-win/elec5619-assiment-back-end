@@ -10,41 +10,40 @@ import org.springframework.transaction.annotation.Transactional;
 public interface AdminService {
 
     /**
-     * 校验用户是否存在，并发送验证码
-     * @param admin 用户详细信息
-     * @return 手机验证码和手机号
+     * Check whether the user exists and send the verification code
+     * @param admin admin info
+     * @return Mobile verification code and mobile number
      */
     SmsMessage findAdmin(Admin admin);
 
     /**
-     * 校验用户输入的验证码是否正确
-     * @param smsMessage 用户手机号和验证码
-     * @return 管理员的id
+     * Verify that the verification code entered by the user is correct
+     * @param smsMessage User mobile phone number and verification code
+     * @return id of the administrator
      */
      int checkCode(SmsMessage smsMessage);
 
     /**
-     * 里面有两个新增操作，在同一个事务中，新增完一个后如果抛出异常，则会回滚。
+     * There are two new operations, and if an exception is thrown after adding one in the same transaction, it will be rolled back.
      *
-     * 注册管理员，检验用户名，手机号，邮箱是否存在
-     * @param registerDetail 用户详细注册信息
-     * @return 注册成功信息
+     * Register the administrator and check whether the user name, mobile phone number and email address exist
+     * @param registerDetail User registration details
+     * @return Registration success Information
      */
     String registerAdmin(String registerDetail);
 
     /**
-     * 查用当前线程内的管理员的信息，返回给前端
-     * @param adminId 管理员的id
-     * @return 该管理员的详细信息
+     * Query the administrator in the current thread and return it to the front end
+     * @param adminId id of the administrator
+     * @return Details about the administrator
      */
     People searchAdminInfo(int adminId);
 
     /**
-     * 里面有两个新增操作，在同一个事务中，新增完一个后如果抛出异常，则会回滚。
      *
-     * update管理员，检验用户名，手机号，邮箱是否存在
-     * @param updateDetail 用户详细update信息
-     * @return update成功信息
+     * Update the administrator's information and check whether the user name, mobile phone number and email address exist
+     * @param updateDetail update detail
+     * @return update success info
      */
     String updateAdmin(String updateDetail);
 }

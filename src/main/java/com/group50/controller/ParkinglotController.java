@@ -13,8 +13,8 @@ public class ParkinglotController {
     private ParkinglotService parkinglotService;
 
     /**
-     * 查询停车场信息
-     * Get请求，接口地址 http://localhost:8080/5619/parkinglots
+     * Query car Park information
+     * Get，address: http://localhost:8080/5619/parkinglots
      *  {
      *    "data": {
      *       "parkinglotId": 1,
@@ -25,7 +25,7 @@ public class ParkinglotController {
      *    "code": 200,
      *    "msg": "Success"
      *   }
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping
     public Parkinglot findParkingLot(){
@@ -33,10 +33,10 @@ public class ParkinglotController {
     }
 
     /**
-     * put请求，接口地址 http://localhost:8080/5619/parkinglots/modifyCapacity/#
-     * 修改停车场容量停车场信息
-     * @param capacity 要修改的容量
-     * @return 查询成功返回200返回码。未知异常返回100代码。
+     * put，address: http://localhost:8080/5619/parkinglots/modifyCapacity/#
+     * Modifying Parking lot Capacity Parking lot information
+     * @param capacity The capacity to modify
+     * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @PutMapping("/modifyCapacity/{capacity}")
     public String modifyCapacity(@PathVariable int capacity){

@@ -17,7 +17,7 @@ public class CommentController {
     private CommentService commentService;
 
     /**
-     * 查询所有的评论信息
+     * Query all comments
      *
      *  {
      *           "commentId": 1,
@@ -33,8 +33,8 @@ public class CommentController {
      *            "commentDate": "2022-10-13 22:20:46",
      *            "commentContent": "Blow, blow, thou winter wind! Thou art not so unkind as man's ingratitude."
      *   },
-     * Get请求，接口地址 http://localhost:8080/5619/comments/allComments
-     * @return 用户输入正确的验证码返回200返回码。未知异常返回100代码。
+     * Get，address http://localhost:8080/5619/comments/allComments
+     * @return If the user enters a correct verification code, 200 is returned. Unknown exception returns 100 code.
      */
     @GetMapping("/allComments")
     public List<CommentRecord> allComments(){

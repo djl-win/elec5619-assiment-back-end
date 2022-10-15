@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 拦截用户的登录操作
+ * intercept user login operations
  */
 @Component
 public class SpringHandlerLogin implements HandlerInterceptor {
@@ -25,11 +25,11 @@ public class SpringHandlerLogin implements HandlerInterceptor {
         Object adminId = session.getAttribute("adminId");
 
         if(adminId == null){
-            //拦截成功返回报错信息，或者重定向
+            //Successful interception returns an error message or a redirect
 //            response.sendRedirect(request.getContextPath()+"/pages/mIndex.html");
             throw new CustomException(ResultInfo.NON_LOGIN_CODE,ResultInfo.NON_LOGIN_MSG);
         }
-        //加载管理员id到线程
+        //Load the administrator id to the thread
 //        AdminThread.setCurrentId((Long)adminId);
         return true;
     }

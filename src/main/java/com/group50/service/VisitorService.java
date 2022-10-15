@@ -12,7 +12,7 @@ import java.util.List;
 public interface VisitorService {
 
     /**
-     * 生成1-20条假的游客数据
+     * Generate 1-20 fake tourist data
      */
     ArrayList<Visitor> newFakeVisitors();
 

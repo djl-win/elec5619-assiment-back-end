@@ -32,29 +32,29 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public SmsMessage findAdmin(Admin admin) {
 
-        //1.接受前端传入的信息（用户名，密码）
+        //1.Accept incoming information from the front end (username, password)
         String username = admin.getAdminUsername();
         String password = admin.getAdminPassword();
 
-        //2.验证是否正确
+        //2.validate
         Admin adminResult = adminRepository.findByAdminUsernameAndAdminPassword(username,password);
 
-        //3.不正确返回
+        //3.If incorrect return
         if(adminResult == null){
             throw new CustomException(ResultInfo.NON_EXIST_USER_CODE, ResultInfo.NON_EXIST_USER_MSG);
         }
 
-        //4.正确的话就返回验证码到前端
-        //4.1 查询用户手机号
+        //4.If correct, return the captcha to the front end
+        //4.1 Query a user's mobile number
         People peopleResult = peopleRepository.findPeopleByPeopleIdEquals(adminResult.getAdminPeopleId());
         String peoplePhone = peopleResult.getPeoplePhone();
 
-        //4.2 帮助其发送验证码
-        //4.3 返回值传给前端
+        //4.2 Help it send the verification code
+        //4.3 Return values are passed to the front end
         SmsMessage smsMessage = new SmsMessage();
         smsMessage.setCode(smsUtil.makeCode(peoplePhone));
 
-        //4.4 把查询到的用户返回出去,之后存入session方便下个方法调用
+        //4.4 Return the user that I found, and then store it in session for the next method call
         smsMessage.setPeople(peopleResult);
 
         return smsMessage;
@@ -63,21 +63,21 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int checkCode(SmsMessage smsMessage) {
 
-        //1.从缓存中获取用户的验证码
+        //1.Obtain the user verification code from the cache
         String codeFromCache = smsUtil.getSmsCodeFromCache(smsMessage.getPeople().getPeoplePhone());
 
-        //2.检验用户输入的验证码是否正确
+        //2.Verify that the verification code is correct
         boolean equals = smsMessage.getCode().equals(codeFromCache);
 
-        //3.登陆失败返回402返回码，以及错误信息
+        //3.Login failure returns 402 return code with error message
         if(!equals){
             throw new CustomException(ResultInfo.WRONG_PHONE_VERIFICATION_CODE,ResultInfo.WRONG_PHONE_VERIFICATION_MSG);
         }
 
-        //4.登录成功，把用户存储到session中，设置拦截器。到拦截器handler中，把其用户id设置到线程中去。
+        //4.The login succeeds, the user is stored in session, and the interceptor is set. Go to the interceptor handler and set its user id to the thread.
         Admin admin = adminRepository.findAdminByAdminPeopleIdEquals(smsMessage.getPeople().getPeopleId());
 
-        //5.返回管理员的id，到controller层，在controller层加载到session中
+        //5.Returns the administrator's id to the controller layer, where it is loaded into the session
         return admin.getAdminId();
 
     }
@@ -88,32 +88,32 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = JSON.parseObject(registerDetail, Admin.class);
         People people = JSON.parseObject(registerDetail, People.class);
         
-        //1.查询tb_admin表,username存不存在，存在直接返回404
+        //1.Query tb_admin. If username exists, returne 404
         Admin tempAdmin = adminRepository.findAdminByAdminUsernameEquals(admin.getAdminUsername());
         if(tempAdmin != null){
             throw new CustomException(ResultInfo.EXIST_USERNAME_CODE, ResultInfo.EXIST_USERNAME_MSG);
         }
 
-        //2.查询tb_people表,Phone存不存在，存在直接返回405
+        //2.Query tb_people. If Phone exists, return 405
         People tempPeopleOne = peopleRepository.findPeopleByPeoplePhoneEquals(people.getPeoplePhone());
         if(tempPeopleOne != null){
             throw new CustomException(ResultInfo.EXIST_PHONE_CODE, ResultInfo.EXIST_PHONE_MSG);
         }
 
-        //3.查询tb_people表,Email存不存在，存在返回406
+        //3.Query tb_people. If the Email store exists, return 406
         People tempPeopleTwo = peopleRepository.findPeopleByPeopleEmailEquals(people.getPeopleEmail());
         if(tempPeopleTwo != null){
             throw new CustomException(ResultInfo.EXIST_EMAIL_CODE, ResultInfo.EXIST_EMAIL_MSG);
         }
 
-        //4.新增一个people记录
+        //4.new people record
         People newPeople = peopleRepository.save(people);
 
-        //5.获取新增people的id，当作admin的外键
+        //5.Get the id of the new people as a foreign key for admin
         int newPeopleId = newPeople.getPeopleId();
         admin.setAdminPeopleId(newPeopleId);
 
-        //6.新增一个admin记录，完事
+        //6.Add an admin record
         Admin newAdmin = adminRepository.save(admin);
 
         return "register successful";

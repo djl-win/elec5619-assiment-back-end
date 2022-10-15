@@ -10,13 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ParkinglotService {
 
     /**
-     * 查询停车场信息
-     * @return 停车场信息
+     * Query car Park information
+     * @return Parking Lot Information
      */
     Parkinglot findParkinglot();
 
     /**
-     * 修改停车场容量
+     * Modifying car park capacity
      *
      */
     void modifyCapacity(int capacity);

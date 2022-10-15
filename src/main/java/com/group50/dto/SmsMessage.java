@@ -4,11 +4,11 @@ import com.group50.entity.People;
 import lombok.Data;
 
 /**
- * 用户登录信息的类
+ * Class for user login information
  */
 @Data
 public class SmsMessage {
-    //或者用userDetail
+
     private People people;
 
     private String code;

@@ -13,8 +13,8 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
 
     /**
-     * 查询所有的评论
-     * @return 集合（评论信息）
+     * query all comments
+     * @return list（comment info）
      */
     @Query(value ="SELECT a.comment_id as commentId, b.people_name as peopleName, a.comment_rank as commentRank,DATE_FORMAT(a.comment_date, '%Y-%m-%d %H:%i:%s' ) as commentDate, a.comment_content as commentContent\n" +
             "from tb_comment as a join tb_people as b on a.comment_peopleId = b.people_id\n" +

@@ -16,13 +16,13 @@ public class VenueController {
     private VenueService venueService;
 
     /**
-     * PUT请求，接口地址 http://localhost:8080/5619/venues/modifyVenueCapacity
+     * PUT，address http://localhost:8080/5619/venues/modifyVenueCapacity
      * {
      *    "venueId" : "1",
      *    "venueCapacity" : "30"
      * }
-     * @param venue 场馆的json格式，详见接口文档
-     * @return 正确返回200返回码。未知异常返回100代码。
+     * @param venue Venue json format, see interface documentation
+     * @return Correct return 200 return code. Unknown exception returns 100 code.
      */
     @PutMapping("/modifyVenueCapacity")
     private String modifyVenueCapacity(@RequestBody Venue venue){

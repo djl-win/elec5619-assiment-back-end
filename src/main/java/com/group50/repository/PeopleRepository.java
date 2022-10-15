@@ -13,30 +13,29 @@ import java.util.Map;
 public interface PeopleRepository extends JpaRepository<People, Integer> {
 
     /**
-     * 通过people的id查询people详细信息,存储到缓存,避免浪费
-     * @param id 用户详细信息的id
-     * @return 用户详细信息
+     * Query detailed information about people using the id of people
+     * @param id peopleid
+     * @return user info
      */
-//    @Cacheable(value = "peopleInfoSpace", key = "#id")
     People findPeopleByPeopleIdEquals(int id);
 
     /**
-     * 通过people的phone查询people详细信息
-     * @param peoplePhone 用户手机号
-     * @return 用户详细信息
+     * Use the people phone to query details about people
+     * @param peoplePhone user phone number
+     * @return user info
      */
     People findPeopleByPeoplePhoneEquals(String peoplePhone);
 
     /**
-     * 通过people的email查询people详细信息
-     * @param peopleEmail 用户邮箱
-     * @return 用户详细信息
+     * people email to query people details
+     * @param peopleEmail user email
+     * @return user info
      */
     People findPeopleByPeopleEmailEquals(String peopleEmail);
 
     /**
-     * 查询访客性别人数分布
-     * @return 数组[男的数量，女的数量]
+     * Query the gender distribution of visitors
+     * @return Array [number of men, number of women]
      */
     @Query(value="select count(*), people_gender \n" +
             "from tb_people \n" +
@@ -45,8 +44,8 @@ public interface PeopleRepository extends JpaRepository<People, Integer> {
     int[] findNumberByPeopleGenderAll();
 
     /**
-     * 查询7天内访客性别人数分布
-     * @return 数组[男的数量，女的数量]
+     * Query the gender distribution of visitors within 7 days
+     * @return Array [number of men, number of women]
      */
     @Query(value ="\n" +
             "select count(DISTINCT visit_visitorId) AS peopleNumber, people_gender from \n" +
@@ -59,8 +58,8 @@ public interface PeopleRepository extends JpaRepository<People, Integer> {
     int[] findNumberByPeopleGenderSevenDays();
 
     /**
-     * 查询访客年龄区间人数分布
-     * @return 集合（年龄段，数量）
+     * Query the age distribution of visitors
+     * @return Set (age group, number)
      */
     @Query(value="SELECT\n" +
             "\tCASE\n" +

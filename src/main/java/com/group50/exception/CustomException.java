@@ -1,7 +1,7 @@
 package com.group50.exception;
 
 /**
- * 自定义异常处理，handler中进行处理
+ * Custom exception handling is performed in the handler
  */
 public class CustomException extends RuntimeException{
 
