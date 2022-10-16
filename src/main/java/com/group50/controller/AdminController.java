@@ -77,14 +77,14 @@ public class AdminController {
     }
 
     /**
-     * Get请求，接口地址 http://localhost:8080/5619/admins/adminInfo
+     * Get，address http://localhost:8080/5619/admins/adminInfo
      * @param httpServletRequest ###
-     * @return 返回当前登录管理员的个人信息，people表中的
+     * @return Returns the personal information of the current login administrator, in the people table
      */
     @GetMapping("/adminInfo")
     public People adminSearch(HttpServletRequest httpServletRequest){
         HttpSession session = httpServletRequest.getSession();
-        //获取session中的管理员id
+        //get id from session
         int adminId = (int) session.getAttribute("adminId");
         return adminService.searchAdminInfo(adminId);
     }

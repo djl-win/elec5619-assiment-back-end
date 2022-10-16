@@ -102,7 +102,7 @@ public class VisitController {
     /**
      * Query the total flow of the museum on that day (not real time, total)
      * Get，address: http://localhost:8080/5619/visits/today/totalflow
-     * data里面的数据即为博物馆内总人数
+     * The data inside is the total number of people in the museum
      * @return 200 Return code is displayed if the query is successful. Unknown exception returns 100 code.
      */
     @GetMapping("/today/totalflow")
